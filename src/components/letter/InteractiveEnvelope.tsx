@@ -16,7 +16,7 @@ export function InteractiveEnvelope({
   isOpened,
   onOpen,
   senderName = 'Alex',
-  recipientName = 'Sarah',
+  recipientName = 'Meghna',
 }: InteractiveEnvelopeProps) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,12 +29,12 @@ export function InteractiveEnvelope({
         disabled={isOpened}
         aria-expanded={isOpened}
         aria-label={`Personal letter for ${recipientName} from ${senderName}, tap the gold seal to open`}
-        className="group relative w-full h-48 sm:h-56 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-400 rounded-2xl cursor-pointer"
+        className="group relative w-full h-48 sm:h-56 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9A441] rounded-2xl cursor-pointer"
       >
         {/* ENVELOPE BACK BASE */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#2D124D] via-[#220B3B] to-[#160626] border border-brand-pink-400/40 shadow-dramatic overflow-hidden">
-          {/* Subtle textured grid/stars */}
-          <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#F472B6_1px,transparent_1px)] [background-size:14px_14px]" />
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#FFF0F5] via-[#FCE4EC] to-[#F8B4C8] border border-[#E86A92]/40 shadow-romantic overflow-hidden">
+          {/* Subtle textured grid/sparkles */}
+          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#E86A92_1px,transparent_1px)] [background-size:14px_14px]" />
         </div>
 
         {/* LETTER SHEET INSIDE (EMERGES WHEN OPENED) */}
@@ -46,22 +46,22 @@ export function InteractiveEnvelope({
               : { y: 0, scale: 0.98, opacity: 0.9 }
           }
           transition={{ duration: prefersReducedMotion ? 0.1 : 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-x-4 top-2 h-40 sm:h-48 rounded-xl bg-gradient-to-b from-[#FFFDF9] to-[#FEF3C7] shadow-xl border border-brand-gold-300/80 p-3.5 flex flex-col justify-between text-neutral-800 z-10"
+          className="absolute inset-x-4 top-2 h-40 sm:h-48 rounded-xl bg-gradient-to-b from-[#FFFDF9] to-[#FFF9F5] shadow-xl border border-[#D9A441]/60 p-3.5 flex flex-col justify-between text-[#3B0D1E] z-10"
         >
-          <div className="flex items-center justify-between border-b border-brand-gold-300/40 pb-1.5">
-            <span className="text-[11px] font-bold font-display uppercase tracking-wider text-brand-purple-900">
+          <div className="flex items-center justify-between border-b border-[#D9A441]/30 pb-1.5">
+            <span className="text-[11px] font-bold font-display uppercase tracking-wider text-[#3B0D1E]">
               Personal Letter
             </span>
-            <span className="text-xs text-brand-pink-500">💌</span>
+            <span className="text-xs text-[#E86A92]">💌</span>
           </div>
 
           <div className="space-y-1.5 my-auto text-left">
-            <div className="w-3/4 h-2 bg-neutral-300/80 rounded-full" />
-            <div className="w-full h-2 bg-neutral-300/60 rounded-full" />
-            <div className="w-5/6 h-2 bg-neutral-300/60 rounded-full" />
+            <div className="w-3/4 h-2 bg-[#F8B4C8]/50 rounded-full" />
+            <div className="w-full h-2 bg-[#F8B4C8]/40 rounded-full" />
+            <div className="w-5/6 h-2 bg-[#F8B4C8]/40 rounded-full" />
           </div>
 
-          <div className="text-right text-[11px] font-bold text-brand-purple-900 font-display">
+          <div className="text-right text-[11px] font-bold text-[#8B2648] font-display">
             For {recipientName} ✨
           </div>
         </motion.div>
@@ -70,20 +70,20 @@ export function InteractiveEnvelope({
         <div className="absolute inset-0 z-20 pointer-events-none">
           <svg
             viewBox="0 0 340 200"
-            className="w-full h-full filter drop-shadow-[0_-3px_8px_rgba(0,0,0,0.4)]"
+            className="w-full h-full filter drop-shadow-[0_-2px_6px_rgba(232,106,146,0.25)]"
           >
             <defs>
               <linearGradient id="pocketGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#3E1766" />
-                <stop offset="100%" stopColor="#1E0933" />
+                <stop offset="0%" stopColor="#F8B4C8" />
+                <stop offset="100%" stopColor="#FCE4EC" />
               </linearGradient>
             </defs>
             {/* Left triangle flap */}
-            <polygon points="0,0 170,120 0,200" fill="url(#pocketGrad)" opacity="0.96" />
+            <polygon points="0,0 170,120 0,200" fill="url(#pocketGrad)" opacity="0.98" />
             {/* Right triangle flap */}
-            <polygon points="340,0 170,120 340,200" fill="url(#pocketGrad)" opacity="0.96" />
+            <polygon points="340,0 170,120 340,200" fill="url(#pocketGrad)" opacity="0.98" />
             {/* Bottom triangle flap */}
-            <polygon points="0,200 170,105 340,200" fill="#250C3D" stroke="rgba(244,114,182,0.35)" strokeWidth="1" />
+            <polygon points="0,200 170,105 340,200" fill="#FCE4EC" stroke="rgba(232,106,146,0.35)" strokeWidth="1" />
           </svg>
         </div>
 
@@ -97,14 +97,14 @@ export function InteractiveEnvelope({
           transition={{ duration: prefersReducedMotion ? 0.1 : 0.55, ease: 'easeInOut' }}
           className="absolute inset-x-0 top-0 h-28 z-30 pointer-events-none"
         >
-          <svg viewBox="0 0 340 120" className="w-full h-full filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+          <svg viewBox="0 0 340 120" className="w-full h-full filter drop-shadow-[0_4px_8px_rgba(232,106,146,0.3)]">
             <defs>
               <linearGradient id="topFlapGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#4A1D6D" />
-                <stop offset="100%" stopColor="#2D124D" />
+                <stop offset="0%" stopColor="#F8B4C8" />
+                <stop offset="100%" stopColor="#E86A92" />
               </linearGradient>
             </defs>
-            <polygon points="0,0 170,110 340,0" fill="url(#topFlapGrad)" stroke="rgba(244,114,182,0.45)" strokeWidth="1.5" />
+            <polygon points="0,0 170,110 340,0" fill="url(#topFlapGrad)" stroke="rgba(232,106,146,0.45)" strokeWidth="1.5" />
           </svg>
 
           {/* Golden Wax Seal */}
@@ -112,21 +112,21 @@ export function InteractiveEnvelope({
             <motion.div
               whileHover={{ scale: 1.15 }}
               whileTap={{ scale: 0.95 }}
-              className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 via-brand-gold-300 to-amber-100 border-2 border-amber-200 flex items-center justify-center shadow-glow-gold text-brand-purple-950 font-bold"
+              className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#D9A441] via-[#F3CE72] to-[#FFF5DB] border-2 border-[#D9A441] flex items-center justify-center shadow-glow-gold text-[#3B0D1E] font-bold cursor-pointer"
             >
-              <Heart className="w-5 h-5 fill-brand-purple-950 text-brand-purple-950" />
+              <Heart className="w-5 h-5 fill-[#3B0D1E] text-[#3B0D1E]" />
             </motion.div>
           </div>
         </motion.div>
 
         {/* Floating Sparkles around seal */}
         <div className="absolute -top-2 -right-2 z-40">
-          <Sparkles className="w-5 h-5 text-brand-gold-300 animate-pulse" />
+          <Sparkles className="w-5 h-5 text-[#D9A441] animate-pulse" />
         </div>
       </button>
 
-      <span className="text-xs font-semibold text-brand-gold-300/90 mt-4 tracking-wide flex items-center gap-1.5">
-        <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
+      <span className="text-xs font-semibold text-[#8B2648] mt-4 tracking-wide flex items-center gap-1.5">
+        <Sparkles className="w-3.5 h-3.5 text-[#D9A441]" />
         <span>Tap the golden wax seal to open your letter</span>
       </span>
     </div>

@@ -102,35 +102,35 @@ export default function StyleLabPage() {
           </SectionHeading>
           <Card variant="glass" className="space-y-6">
             <div>
-              <span className="text-[11px] uppercase tracking-wider text-brand-pink-300 font-semibold">Display / Hero (Cinzel / Serif)</span>
+              <span className="text-[11px] uppercase tracking-wider text-[#8B2648] font-semibold">Display / Hero (Cinzel / Serif)</span>
               <h1 className="text-3xl sm:text-4xl font-bold font-display text-gradient-romantic">
-                Happy Birthday, Sarah! ✨🎂
+                Happy Birthday, Meghna! ✨🎂
               </h1>
             </div>
 
             <div>
-              <span className="text-[11px] uppercase tracking-wider text-brand-gold-300 font-semibold">Gold Gradient Heading</span>
+              <span className="text-[11px] uppercase tracking-wider text-[#D9A441] font-semibold">Gold Gradient Heading</span>
               <h2 className="text-2xl sm:text-3xl font-bold font-display text-gradient-gold">
                 A Magical Year Awaits
               </h2>
             </div>
 
             <div>
-              <span className="text-[11px] uppercase tracking-wider text-brand-cream-200/70 font-semibold">Section Heading</span>
-              <h3 className="text-xl font-bold font-display text-brand-cream-50">
+              <span className="text-[11px] uppercase tracking-wider text-[#8B2648] font-semibold">Section Heading</span>
+              <h3 className="text-xl font-bold font-display text-[#3B0D1E]">
                 Memories Down the Lane
               </h3>
             </div>
 
             <div>
-              <span className="text-[11px] uppercase tracking-wider text-brand-cream-200/70 font-semibold">Body Sans-Serif (Plus Jakarta Sans)</span>
-              <p className="text-sm sm:text-base text-brand-cream-100/90 leading-relaxed max-w-xl">
+              <span className="text-[11px] uppercase tracking-wider text-[#8B2648] font-semibold">Body Sans-Serif (Plus Jakarta Sans)</span>
+              <p className="text-sm sm:text-base text-[#3B0D1E]/90 leading-relaxed max-w-xl">
                 Every moment shared with you has been a cherished memory. May this upcoming chapter be filled with wild adventures, peaceful moments, and radiant joy.
               </p>
             </div>
 
             <div>
-              <span className="text-[11px] uppercase tracking-wider text-brand-pink-300 font-semibold">Handwritten / Intimate Accent (Caveat)</span>
+              <span className="text-[11px] uppercase tracking-wider text-[#E86A92] font-semibold">Handwritten / Intimate Accent (Caveat)</span>
               <HandwrittenText size="lg" variant="pink">
                 “You make the world brighter simply by being in it.” ✨
               </HandwrittenText>
@@ -146,29 +146,29 @@ export default function StyleLabPage() {
             3. Central Color System & Design Tokens
           </SectionHeading>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-            <div className="p-3.5 rounded-xl bg-brand-pink-400 text-brand-purple-950 font-bold text-xs space-y-1 shadow-glow-pink-soft">
-              <div>Pastel Pink</div>
-              <div className="text-[10px] opacity-80">#F472B6</div>
+            <div className="p-3.5 rounded-xl bg-[#F8B4C8] text-[#3B0D1E] font-bold text-xs space-y-1 shadow-sm">
+              <div>Blush Pink</div>
+              <div className="text-[10px] opacity-80">#F8B4C8</div>
             </div>
-            <div className="p-3.5 rounded-xl bg-brand-cream-100 text-brand-purple-950 font-bold text-xs space-y-1 shadow-subtle">
-              <div>Soft Cream</div>
-              <div className="text-[10px] opacity-80">#FFFBEB</div>
+            <div className="p-3.5 rounded-xl bg-[#E86A92] text-white font-bold text-xs space-y-1 shadow-sm">
+              <div>Rose Pink</div>
+              <div className="text-[10px] opacity-80">#E86A92</div>
             </div>
-            <div className="p-3.5 rounded-xl bg-brand-purple-900 border border-brand-purple-700 text-brand-cream-100 font-bold text-xs space-y-1">
-              <div>Deep Purple</div>
-              <div className="text-[10px] opacity-80">#1A0B2E</div>
+            <div className="p-3.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] text-[#3B0D1E] font-bold text-xs space-y-1">
+              <div>Warm Cream</div>
+              <div className="text-[10px] opacity-80">#FFF9F5</div>
             </div>
-            <div className="p-3.5 rounded-xl bg-brand-violet-500 text-white font-bold text-xs space-y-1 shadow-glow-violet-soft">
-              <div>Violet</div>
-              <div className="text-[10px] opacity-80">#8B5CF6</div>
+            <div className="p-3.5 rounded-xl bg-[#E8DDF5] text-[#3B0D1E] font-bold text-xs space-y-1 shadow-sm">
+              <div>Lavender Haze</div>
+              <div className="text-[10px] opacity-80">#E8DDF5</div>
             </div>
-            <div className="p-3.5 rounded-xl bg-brand-gold-400 text-brand-purple-950 font-bold text-xs space-y-1 shadow-glow-gold-soft">
-              <div>Warm Gold</div>
-              <div className="text-[10px] opacity-80">#FBBF24</div>
+            <div className="p-3.5 rounded-xl bg-[#D9A441] text-[#3B0D1E] font-bold text-xs space-y-1 shadow-glow-gold-soft">
+              <div>Champagne Gold</div>
+              <div className="text-[10px] opacity-80">#D9A441</div>
             </div>
-            <div className="p-3.5 rounded-xl bg-white text-brand-purple-950 font-bold text-xs space-y-1 shadow-subtle">
-              <div>Pure White</div>
-              <div className="text-[10px] opacity-80">#FFFFFF</div>
+            <div className="p-3.5 rounded-xl bg-[#3B0D1E] text-white font-bold text-xs space-y-1 shadow-sm">
+              <div>Deep Berry</div>
+              <div className="text-[10px] opacity-80">#3B0D1E</div>
             </div>
           </div>
         </section>

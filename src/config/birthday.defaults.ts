@@ -2,7 +2,7 @@ import { BirthdayConfig } from '@/types/config.types';
 
 export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
   recipient: {
-    name: 'Sarah',
+    name: 'Meghna',
     nickname: 'Sunshine',
     relation: 'Best Friend',
     birthDate: 'October 24',
@@ -14,13 +14,13 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
   },
   theme: 'romantic',
   intro: {
-    greeting: 'Hey Sarah 🌸',
+    greeting: 'Hey Meghna 🌸',
     subheading: 'I made a little digital universe created just for your special day...',
     badgeText: 'A Special Birthday Surprise ✨',
     ctaText: 'Open Your Gift →',
   },
   reveal: {
-    headline: 'Happy Birthday, Sarah! 🎂✨',
+    headline: 'Happy Birthday, Meghna! 🎂✨',
     subheadline: 'Today is all about celebrating the wonderful, radiant human you are.',
     highlightText: 'May this year bring you endless joy, love, laughter, and magic.',
   },
@@ -113,7 +113,7 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
       id: 'photo-1',
       url: '/assets/images/photo-1.jpg',
       caption: 'Unfiltered joy and radiant smiles',
-      alt: 'Sarah smiling brightly',
+      alt: 'Meghna smiling brightly',
     },
     {
       id: 'photo-2',
@@ -124,7 +124,7 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
   ],
   letter: {
     title: 'A Letter Just For You 💌',
-    salutation: 'Dearest Sarah,',
+    salutation: 'Dearest Meghna,',
     paragraphs: [
       'As you turn another page in your book of life, I wanted to take a quiet moment to tell you how deeply appreciated and cherished you are.',
       'Through every high and low, your strength, compassion, and humor have inspired everyone lucky enough to be in your orbit.',
@@ -135,9 +135,9 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
     signature: 'Alex ✨',
   },
   celebration: {
-    title: 'Happy Birthday, Sunshine! 🎉',
+    title: 'Happy Birthday, Meghna! 🎉',
     subtitle: 'Let the celebrations begin! May your day be filled with endless love, laughter, and magic.',
-    confettiColors: ['#F472B6', '#FBBF24', '#8B5CF6', '#FFFFFF', '#F9A8D4'],
+    confettiColors: ['#F8B4C8', '#E86A92', '#E8DDF5', '#D9A441', '#FFF9F5', '#FFFFFF'],
     replayButtonText: 'Experience Again 🔄',
   },
   audio: {

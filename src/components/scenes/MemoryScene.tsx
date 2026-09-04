@@ -46,8 +46,8 @@ export function MemoryScene() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="space-y-1.5 mb-3"
       >
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-pink-400/15 text-brand-pink-300 border border-brand-pink-400/30">
-          <BookOpen className="w-3.5 h-3.5 text-brand-gold-300" />
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-white/80 text-brand-rose border border-brand-rose/30 shadow-glow-pink-soft backdrop-blur-sm">
+          <BookOpen className="w-3.5 h-3.5 text-brand-champagne" />
           <span>Scrapbook Memories</span>
         </span>
 
@@ -55,7 +55,7 @@ export function MemoryScene() {
           {birthdayConfig.memories.title || 'Our Memory Lane 📸'}
         </h2>
 
-        <p className="text-xs sm:text-sm text-brand-cream-200/80 max-w-xs mx-auto">
+        <p className="text-xs sm:text-sm text-brand-berry font-sans max-w-xs mx-auto font-medium">
           {birthdayConfig.memories.subtitle || 'A few unforgettable moments we have shared...'}
         </p>
       </motion.div>
@@ -89,9 +89,9 @@ export function MemoryScene() {
           onClick={handlePrevMemory}
           disabled={currentIndex === 0}
           aria-label="Previous memory"
-          className="p-2 rounded-full bg-white/5 hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none text-brand-cream-200 transition-colors"
+          className="p-2.5 rounded-full bg-white/80 hover:bg-white disabled:opacity-30 disabled:pointer-events-none text-brand-rose border border-brand-blush/60 transition-colors shadow-subtle"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-4 h-4" />
         </button>
 
         {/* Pagination Dots */}
@@ -104,8 +104,8 @@ export function MemoryScene() {
               aria-label={`Go to memory ${idx + 1}`}
               className={`h-2 rounded-full transition-all duration-300 ${
                 currentIndex === idx
-                  ? 'w-6 bg-brand-pink-400 shadow-glow-pink-soft'
-                  : 'w-2 bg-white/20 hover:bg-white/40'
+                  ? 'w-6 bg-brand-rose shadow-glow-pink-soft'
+                  : 'w-2 bg-brand-blush/60 hover:bg-brand-blush'
               }`}
             />
           ))}
@@ -115,9 +115,9 @@ export function MemoryScene() {
           type="button"
           onClick={handleNextMemory}
           aria-label={currentIndex === memories.length - 1 ? 'Finish memories' : 'Next memory'}
-          className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-brand-cream-200 transition-colors"
+          className="p-2.5 rounded-full bg-white/80 hover:bg-white text-brand-rose border border-brand-blush/60 transition-colors shadow-subtle"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 
@@ -127,7 +127,7 @@ export function MemoryScene() {
           type="button"
           onClick={handleContinue}
           aria-label="Proceed to personal letter scene"
-          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-rose via-brand-blush to-brand-champagne text-brand-berry font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group border border-white/40"
         >
           <span>A Personal Letter 💌</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -137,7 +137,7 @@ export function MemoryScene() {
           type="button"
           onClick={prevScene}
           aria-label="Return to special notes scene"
-          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
+          className="text-xs text-brand-muted hover:text-brand-deepRose transition-colors flex items-center gap-1 py-1 font-medium"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           <span>Back</span>

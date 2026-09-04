@@ -34,8 +34,8 @@ export function LetterScene() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="space-y-1.5 mb-2"
       >
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-pink-400/15 text-brand-pink-300 border border-brand-pink-400/30">
-          <Mail className="w-3.5 h-3.5 text-brand-gold-300" />
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#FCE4EC] text-[#8B2648] border border-[#F8B4C8]">
+          <Mail className="w-3.5 h-3.5 text-[#E86A92]" />
           <span>From The Heart</span>
         </span>
 
@@ -69,21 +69,21 @@ export function LetterScene() {
               initial={{ opacity: 0, y: 24, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full max-w-md bg-gradient-to-b from-[#FFFDF9] via-[#FFFBEB] to-[#FEF3C7] text-neutral-900 rounded-2xl p-5 sm:p-6 border border-brand-gold-300/80 shadow-dramatic text-left space-y-4 max-h-[380px] sm:max-h-[420px] overflow-y-auto pr-2 relative select-text"
+              className="w-full max-w-md bg-gradient-to-b from-[#FFFDF9] via-[#FFF9F5] to-[#FFF0F5] text-[#3B0D1E] rounded-2xl p-5 sm:p-6 border border-[#D9A441]/60 shadow-romantic text-left space-y-4 max-h-[380px] sm:max-h-[420px] overflow-y-auto pr-2 relative select-text"
             >
               {/* Letter Header Ribbon */}
-              <div className="flex items-center justify-between border-b border-brand-gold-400/30 pb-2 select-none">
-                <span className="text-sm font-bold font-display text-brand-purple-950 tracking-wide">
+              <div className="flex items-center justify-between border-b border-[#D9A441]/30 pb-2 select-none">
+                <span className="text-sm font-bold font-display text-[#3B0D1E] tracking-wide">
                   {letter.salutation}
                 </span>
-                <div className="flex items-center gap-1.5 text-xs text-brand-pink-600 font-semibold font-handwriting">
-                  <Sparkles className="w-3.5 h-3.5 text-brand-gold-500" />
+                <div className="flex items-center gap-1.5 text-xs text-[#8B2648] font-semibold font-handwriting">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D9A441]" />
                   <span>With Love</span>
                 </div>
               </div>
 
               {/* Letter Body Paragraphs */}
-              <div className="space-y-3 text-xs sm:text-sm text-neutral-800/90 leading-relaxed font-sans">
+              <div className="space-y-3 text-xs sm:text-sm text-[#3B0D1E]/90 leading-relaxed font-sans">
                 {letter.paragraphs.map((p, idx) => (
                   <p key={idx}>{p}</p>
                 ))}
@@ -91,19 +91,19 @@ export function LetterScene() {
 
               {/* Highlight Handwritten Quote Block */}
               {letter.highlightQuote && (
-                <div className="bg-amber-100/70 rounded-xl p-3.5 border-l-4 border-amber-500 shadow-sm">
-                  <p className="font-handwriting text-xl sm:text-2xl text-neutral-900 leading-snug">
+                <div className="bg-[#FFF5EB] rounded-xl p-3.5 border-l-4 border-[#D9A441] shadow-sm">
+                  <p className="font-handwriting text-xl sm:text-2xl text-[#3B0D1E] leading-snug">
                     {letter.highlightQuote}
                   </p>
                 </div>
               )}
 
               {/* Letter Closing & Signature Stamp */}
-              <div className="pt-2 border-t border-brand-gold-400/20 text-right space-y-0.5">
-                <p className="text-xs text-neutral-600 font-sans italic">
+              <div className="pt-2 border-t border-[#D9A441]/20 text-right space-y-0.5">
+                <p className="text-xs text-[#8B2648] font-sans italic">
                   {letter.closing}
                 </p>
-                <p className="font-handwriting text-2xl sm:text-3xl text-brand-pink-600 font-bold">
+                <p className="font-handwriting text-2xl sm:text-3xl text-[#E86A92] font-bold">
                   {letter.signature}
                 </p>
               </div>
@@ -118,7 +118,7 @@ export function LetterScene() {
           type="button"
           onClick={handleContinue}
           aria-label="Proceed to celebration scene"
-          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#E86A92] via-[#E86A92] to-[#D9A441] text-white font-bold text-base shadow-romantic hover:shadow-glow-pink hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
         >
           <span>Celebrate Together 🎉</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -128,7 +128,7 @@ export function LetterScene() {
           type="button"
           onClick={prevScene}
           aria-label="Return to memory lane scene"
-          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
+          className="text-xs text-[#8B2648]/70 hover:text-[#3B0D1E] transition-colors flex items-center gap-1 py-1 font-medium"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           <span>Back</span>

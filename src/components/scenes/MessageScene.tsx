@@ -29,8 +29,8 @@ export function MessageScene() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="space-y-2 mb-4"
       >
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-pink-400/15 text-brand-pink-300 border border-brand-pink-400/30">
-          <MessageSquareHeart className="w-3.5 h-3.5 text-brand-pink-300" />
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-white/80 text-brand-rose border border-brand-rose/30 shadow-glow-pink-soft backdrop-blur-sm">
+          <MessageSquareHeart className="w-3.5 h-3.5 text-brand-rose" />
           <span>Words From The Heart</span>
         </span>
 
@@ -47,20 +47,20 @@ export function MessageScene() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 + idx * 0.15 }}
-            className="w-full bg-brand-purple-950/60 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/10 text-left shadow-soft space-y-1.5 hover:border-brand-pink-400/30 transition-colors"
+            className="w-full bg-white/85 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-brand-blush/60 text-left shadow-card space-y-1.5 hover:border-brand-rose/50 transition-colors"
           >
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-brand-pink-400/20 text-brand-pink-300 border border-brand-pink-400/30">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-brand-softPink text-brand-deepRose border border-brand-blush">
                 {item.tag}
               </span>
-              <span className="text-xs text-brand-gold-300 font-medium">✨ Note #{idx + 1}</span>
+              <span className="text-xs text-brand-champagne font-semibold">✨ Note #{idx + 1}</span>
             </div>
 
-            <h3 className="text-sm sm:text-base font-bold font-display text-brand-cream-50 pt-1">
+            <h3 className="text-sm sm:text-base font-bold font-display text-brand-berry pt-1">
               {item.title}
             </h3>
 
-            <p className="text-xs sm:text-sm text-brand-cream-100/85 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-brand-berry/90 leading-relaxed font-sans font-normal">
               {item.message}
             </p>
           </motion.div>
@@ -73,10 +73,10 @@ export function MessageScene() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="w-full bg-gradient-to-br from-brand-purple-950/80 to-brand-purple-900/60 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-brand-gold-400/30 text-center space-y-3 mb-6 shadow-soft"
+          className="w-full bg-white/90 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-brand-champagne/40 text-center space-y-3 mb-6 shadow-card"
         >
-          <div className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-brand-gold-300">
-            <Sparkles className="w-4 h-4 text-brand-gold-400" />
+          <div className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-brand-champagne">
+            <Sparkles className="w-4 h-4 text-brand-champagne" />
             <span>{question.question}</span>
           </div>
 
@@ -88,11 +88,11 @@ export function MessageScene() {
                 onClick={() => setSelectedOption(idx)}
                 className={`flex-1 min-h-[44px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold border transition-all duration-200 flex items-center justify-center gap-2 ${
                   selectedOption === idx
-                    ? 'bg-brand-gold-400/25 border-brand-gold-400 text-brand-gold-200 shadow-glow-gold-soft scale-[1.02]'
-                    : 'bg-white/5 border-white/10 text-brand-cream-100 hover:bg-white/10'
+                    ? 'bg-brand-blush/40 border-brand-rose text-brand-deepRose shadow-glow-pink-soft scale-[1.02] font-bold'
+                    : 'bg-brand-softPink/60 border-brand-blush/70 text-brand-berry hover:bg-brand-softPink'
                 }`}
               >
-                {selectedOption === idx && <CheckCircle2 className="w-4 h-4 text-brand-gold-300" />}
+                {selectedOption === idx && <CheckCircle2 className="w-4 h-4 text-brand-rose" />}
                 <span>{option.label}</span>
               </button>
             ))}
@@ -106,7 +106,7 @@ export function MessageScene() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden pt-1"
               >
-                <p className="font-handwriting text-2xl sm:text-3xl text-brand-gold-300">
+                <p className="font-handwriting text-2xl sm:text-3xl text-brand-deepRose">
                   “{question.options[selectedOption].reaction}”
                 </p>
               </motion.div>
@@ -121,7 +121,7 @@ export function MessageScene() {
           type="button"
           onClick={handleContinue}
           aria-label="Proceed to memory lane scene"
-          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-rose via-brand-blush to-brand-champagne text-brand-berry font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group border border-white/40"
         >
           <span>Memory Lane 📸</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -131,7 +131,7 @@ export function MessageScene() {
           type="button"
           onClick={prevScene}
           aria-label="Return to balloon scene"
-          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
+          className="text-xs text-brand-muted hover:text-brand-deepRose transition-colors flex items-center gap-1 py-1 font-medium"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           <span>Back</span>

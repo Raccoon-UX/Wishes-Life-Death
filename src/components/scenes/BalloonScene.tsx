@@ -46,8 +46,8 @@ export function BalloonScene() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="space-y-2 mb-2"
       >
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-violet-400/15 text-brand-violet-200 border border-brand-violet-400/30">
-          <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-white/80 text-brand-rose border border-brand-rose/30 shadow-glow-pink-soft backdrop-blur-sm">
+          <Sparkles className="w-3.5 h-3.5 text-brand-champagne" />
           <span>Secret Balloon Messages</span>
         </span>
 
@@ -55,7 +55,7 @@ export function BalloonScene() {
           {birthdayConfig.balloons.title || 'Floating Secrets 🎈'}
         </h2>
 
-        <p className="text-xs sm:text-sm text-brand-cream-200/80 max-w-xs sm:max-w-sm mx-auto leading-relaxed">
+        <p className="text-xs sm:text-sm text-brand-berry font-sans max-w-xs sm:max-w-sm mx-auto leading-relaxed font-medium">
           {isAllPopped
             ? 'All secret messages have been unlocked! ✨'
             : birthdayConfig.balloons.instruction || 'Tap each floating balloon to reveal a secret note.'}
@@ -85,19 +85,19 @@ export function BalloonScene() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92 }}
               transition={{ duration: 0.45 }}
-              className="w-full p-4 rounded-2xl bg-brand-purple-950/70 backdrop-blur-md border border-brand-pink-400/40 shadow-glow-pink-soft text-center space-y-1.5"
+              className="w-full p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-brand-blush shadow-card text-center space-y-1.5"
             >
-              <div className="flex items-center justify-center gap-2 text-xs font-bold text-brand-pink-300">
+              <div className="flex items-center justify-center gap-2 text-xs font-bold text-brand-rose">
                 <Heart className="w-3.5 h-3.5 fill-current" />
                 <span>Secret Unlocked</span>
                 <span className="text-base">{activeMessage.emoji}</span>
               </div>
-              <p className="font-handwriting text-2xl sm:text-3xl text-brand-cream-100 leading-snug">
+              <p className="font-handwriting text-2xl sm:text-3xl text-brand-deepRose leading-snug">
                 &ldquo;{activeMessage.secretMessage}&rdquo;
               </p>
             </motion.div>
           ) : (
-            <div className="text-xs text-brand-cream-300/50 italic py-4">
+            <div className="text-xs text-brand-muted italic py-4 font-medium">
               Tap any balloon above to pop it and reveal its hidden secret ✨
             </div>
           )}
@@ -110,7 +110,7 @@ export function BalloonScene() {
           type="button"
           onClick={handleContinue}
           aria-label="Proceed to surprise messages scene"
-          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-rose via-brand-blush to-brand-champagne text-brand-berry font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group border border-white/40"
         >
           <span>Special Notes 💌</span>
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -120,7 +120,7 @@ export function BalloonScene() {
           type="button"
           onClick={prevScene}
           aria-label="Return to cake scene"
-          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
+          className="text-xs text-brand-muted hover:text-brand-deepRose transition-colors flex items-center gap-1 py-1 font-medium"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           <span>Back</span>

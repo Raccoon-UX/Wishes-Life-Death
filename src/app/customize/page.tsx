@@ -6,7 +6,6 @@ import { BirthdayConfig, BirthdayTheme } from '@/types/config.types';
 import { DEFAULT_BIRTHDAY_CONFIG } from '@/config/birthday.defaults';
 import { ConfigProvider, useConfigController } from '@/context/ConfigContext';
 import { LivePreview } from '@/components/customizer/LivePreview';
-import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/common/Button';
 import {
   Sparkles,
@@ -237,14 +236,14 @@ function CustomizerContent() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-purple-950 text-brand-cream-50 flex flex-col">
+    <div className="min-h-screen bg-[#FFF9F5] text-[#3B0D1E] flex flex-col">
       {/* Top Header Bar */}
-      <header className="sticky top-0 z-30 bg-brand-purple-950/90 backdrop-blur-md border-b border-brand-white-translucent px-4 sm:px-8 py-3.5">
+      <header className="sticky top-0 z-30 bg-[#FFFDF9]/95 backdrop-blur-md border-b border-[#F8B4C8]/40 px-4 sm:px-8 py-3.5 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="p-2 rounded-xl bg-brand-white-subtle hover:bg-brand-white-translucent text-brand-cream-200 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-semibold"
+              className="p-2 rounded-xl bg-[#FCE4EC] hover:bg-[#F8B4C8] text-[#8B2648] hover:text-[#3B0D1E] transition-colors flex items-center gap-1.5 text-xs font-semibold"
               title="Return to Birthday Experience"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -252,10 +251,10 @@ function CustomizerContent() {
             </Link>
             <div>
               <h1 className="text-base sm:text-lg font-bold font-display text-gradient-romantic leading-tight flex items-center gap-2">
-                <Sliders className="w-4 h-4 text-brand-pink-400" />
+                <Sliders className="w-4 h-4 text-[#E86A92]" />
                 Personalization Studio
               </h1>
-              <p className="text-[11px] text-brand-cream-300/70 hidden sm:block">
+              <p className="text-[11px] text-[#8B2648] hidden sm:block">
                 Customize every detail of your interactive digital birthday gift
               </p>
             </div>
@@ -269,7 +268,7 @@ function CustomizerContent() {
                   resetConfig();
                 }
               }}
-              className="p-2 sm:px-3 sm:py-2 rounded-xl bg-brand-white-subtle hover:bg-red-500/20 text-brand-cream-300 hover:text-red-300 border border-brand-white-subtle transition-colors text-xs font-medium flex items-center gap-1.5"
+              className="p-2 sm:px-3 sm:py-2 rounded-xl bg-[#FFFDF9] hover:bg-red-50 text-[#8B2648] hover:text-red-600 border border-[#F8B4C8] transition-colors text-xs font-medium flex items-center gap-1.5"
               title="Reset to defaults"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -279,7 +278,7 @@ function CustomizerContent() {
             <button
               type="button"
               onClick={() => setMobilePreviewOpen(!mobilePreviewOpen)}
-              className="lg:hidden p-2 sm:px-3 sm:py-2 rounded-xl bg-brand-pink-400/20 text-brand-pink-200 border border-brand-pink-400/30 text-xs font-semibold flex items-center gap-1.5"
+              className="lg:hidden p-2 sm:px-3 sm:py-2 rounded-xl bg-[#FCE4EC] text-[#8B2648] border border-[#F8B4C8] text-xs font-semibold flex items-center gap-1.5"
             >
               <Eye className="w-3.5 h-3.5" />
               <span>{mobilePreviewOpen ? 'Edit Form' : 'Live Preview'}</span>
@@ -287,7 +286,7 @@ function CustomizerContent() {
 
             <Link
               href="/"
-              className="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-brand-pink-500 to-brand-gold-500 text-brand-purple-950 font-bold text-xs sm:text-sm shadow-glow-pink-soft hover:shadow-glow-gold hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5"
+              className="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-[#E86A92] via-[#E86A92] to-[#D9A441] text-white font-bold text-xs sm:text-sm shadow-romantic hover:shadow-glow-pink hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>Launch Experience</span>
@@ -303,14 +302,14 @@ function CustomizerContent() {
         <div className={`lg:col-span-7 flex flex-col gap-6 ${mobilePreviewOpen ? 'hidden lg:flex' : 'flex'}`}>
           
           {/* Preset Quick Loader Banner */}
-          <div className="bg-brand-purple-900/60 rounded-2xl border border-brand-pink-400/25 p-4 sm:p-5 relative overflow-hidden shadow-soft">
+          <div className="bg-[#FFFDF9] rounded-2xl border border-[#F8B4C8] p-4 sm:p-5 relative overflow-hidden shadow-romantic">
             <div className="flex items-center justify-between gap-2 mb-3">
-              <div className="flex items-center gap-2 text-brand-gold-300 font-semibold text-xs uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-2 text-[#8B2648] font-semibold text-xs uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-[#D9A441]" />
                 <span>Quick Preset Templates</span>
               </div>
               {isCustomized && (
-                <span className="text-[10px] font-semibold bg-brand-pink-400/20 text-brand-pink-300 border border-brand-pink-400/30 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-semibold bg-[#FCE4EC] text-[#8B2648] border border-[#F8B4C8] px-2 py-0.5 rounded-full">
                   Customized & Autosaved
                 </span>
               )}
@@ -326,12 +325,12 @@ function CustomizerContent() {
                       updateConfig(preset.config as BirthdayConfig);
                     }
                   }}
-                  className="p-2.5 rounded-xl bg-brand-purple-950/80 hover:bg-brand-purple-900 border border-brand-white-translucent hover:border-brand-pink-400/40 text-left transition-all group"
+                  className="p-2.5 rounded-xl bg-[#FFF9F5] hover:bg-[#FCE4EC] border border-[#F8B4C8]/50 hover:border-[#E86A92] text-left transition-all group"
                 >
-                  <div className="text-xs font-bold text-brand-cream-100 group-hover:text-brand-pink-300 truncate">
+                  <div className="text-xs font-bold text-[#3B0D1E] group-hover:text-[#E86A92] truncate">
                     {preset.name}
                   </div>
-                  <div className="text-[10px] text-brand-cream-300/60 line-clamp-2 mt-0.5 leading-snug">
+                  <div className="text-[10px] text-[#8B2648]/80 line-clamp-2 mt-0.5 leading-snug">
                     {preset.description}
                   </div>
                 </button>
@@ -340,7 +339,7 @@ function CustomizerContent() {
           </div>
 
           {/* Form Tabs Switcher */}
-          <div className="flex items-center gap-1.5 p-1.5 bg-brand-purple-900/40 rounded-2xl border border-brand-white-translucent overflow-x-auto text-xs font-semibold">
+          <div className="flex items-center gap-1.5 p-1.5 bg-[#FFFDF9] rounded-2xl border border-[#F8B4C8] overflow-x-auto text-xs font-semibold shadow-sm">
             {[
               { id: 'basics', label: '1. Recipient & Theme', icon: Heart },
               { id: 'intro', label: '2. Intro & Reveal', icon: Sparkles },
@@ -357,8 +356,8 @@ function CustomizerContent() {
                   onClick={() => setActiveTab(tab.id as 'basics' | 'intro' | 'cake' | 'letter' | 'json')}
                   className={`flex items-center gap-1.5 py-2 px-3 rounded-xl whitespace-nowrap transition-all flex-1 justify-center ${
                     isActive
-                      ? 'bg-brand-pink-400 text-brand-purple-950 font-bold shadow-glow-pink-soft'
-                      : 'text-brand-cream-200/80 hover:text-white hover:bg-brand-white-subtle'
+                      ? 'bg-[#E86A92] text-white font-bold shadow-romantic'
+                      : 'text-[#8B2648] hover:text-[#3B0D1E] hover:bg-[#FCE4EC]'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -370,77 +369,77 @@ function CustomizerContent() {
 
           {/* TAB 1: RECIPIENT & THEME */}
           {activeTab === 'basics' && (
-            <Card variant="romantic" glow="soft" padded className="space-y-6">
+            <div className="bg-[#FFFDF9] border border-[#F8B4C8] rounded-2xl p-6 shadow-romantic space-y-6">
               <div>
                 <h3 className="text-lg font-bold font-display text-gradient-romantic flex items-center gap-2">
-                  <Heart className="w-4 h-4 text-brand-pink-400" />
+                  <Heart className="w-4 h-4 text-[#E86A92]" />
                   Recipient & Sender Details
                 </h3>
-                <p className="text-xs text-brand-cream-200/70 mt-0.5">
+                <p className="text-xs text-[#8B2648] mt-0.5">
                   Set who this gift is celebrating and who is sending it.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100 flex items-center justify-between">
+                  <label className="text-xs font-semibold text-[#3B0D1E] flex items-center justify-between">
                     <span>Recipient Full Name *</span>
-                    <span className="text-[10px] text-brand-pink-300">Used across all scenes</span>
+                    <span className="text-[10px] text-[#E86A92]">Used across all scenes</span>
                   </label>
                   <input
                     type="text"
                     value={config.recipient.name}
                     onChange={(e) => handleNestedFieldChange('recipient', 'name', e.target.value)}
-                    placeholder="e.g. Sarah"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    placeholder="e.g. Meghna"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100 flex items-center justify-between">
+                  <label className="text-xs font-semibold text-[#3B0D1E] flex items-center justify-between">
                     <span>Pet Name / Nickname</span>
-                    <span className="text-[10px] text-brand-cream-300/60">Optional</span>
+                    <span className="text-[10px] text-[#8B2648]/70">Optional</span>
                   </label>
                   <input
                     type="text"
                     value={config.recipient.nickname || ''}
                     onChange={(e) => handleNestedFieldChange('recipient', 'nickname', e.target.value)}
                     placeholder="e.g. Sunshine, Angel"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100">Relationship</label>
+                  <label className="text-xs font-semibold text-[#3B0D1E]">Relationship</label>
                   <input
                     type="text"
                     value={config.recipient.relation || ''}
                     onChange={(e) => handleNestedFieldChange('recipient', 'relation', e.target.value)}
                     placeholder="e.g. Best Friend, Partner, Sister"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100">Sender Name *</label>
+                  <label className="text-xs font-semibold text-[#3B0D1E]">Sender Name *</label>
                   <input
                     type="text"
                     value={config.sender.name}
                     onChange={(e) => handleNestedFieldChange('sender', 'name', e.target.value)}
                     placeholder="e.g. Alex"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
               </div>
 
               {/* Theme Palette Selection */}
-              <div className="space-y-3 pt-2 border-t border-brand-white-translucent">
+              <div className="space-y-3 pt-2 border-t border-[#F8B4C8]/40">
                 <div>
-                  <h4 className="text-sm font-bold font-display text-brand-cream-100 flex items-center gap-2">
-                    <Palette className="w-4 h-4 text-brand-gold-400" />
+                  <h4 className="text-sm font-bold font-display text-[#3B0D1E] flex items-center gap-2">
+                    <Palette className="w-4 h-4 text-[#D9A441]" />
                     Color Palette & Atmosphere Theme
                   </h4>
-                  <p className="text-xs text-brand-cream-300/70">
+                  <p className="text-xs text-[#8B2648]">
                     Choose the visual styling and color harmonies applied across the entire experience.
                   </p>
                 </div>
@@ -455,20 +454,20 @@ function CustomizerContent() {
                         onClick={() => handleFieldChange('theme', theme.id)}
                         className={`p-3 rounded-xl text-left border transition-all flex items-center gap-3 ${
                           isSelected
-                            ? `${theme.borderPreview} bg-brand-purple-900/90 shadow-glow-pink-soft ring-1 ring-brand-pink-400`
-                            : 'border-brand-white-translucent bg-brand-purple-950/60 hover:bg-brand-purple-900/40'
+                            ? 'border-[#E86A92] bg-[#FCE4EC] shadow-romantic ring-1 ring-[#E86A92]'
+                            : 'border-[#F8B4C8] bg-[#FFFDF9] hover:bg-[#FCE4EC]/50'
                         }`}
                       >
                         <div
-                          className={`w-8 h-8 rounded-lg bg-gradient-to-br ${theme.bgPreview} border border-brand-white-translucent flex items-center justify-center shrink-0`}
+                          className={`w-8 h-8 rounded-lg bg-gradient-to-br ${theme.bgPreview} border border-[#F8B4C8] flex items-center justify-center shrink-0`}
                         >
-                          {isSelected && <Check className="w-4 h-4 text-white" />}
+                          {isSelected && <Check className="w-4 h-4 text-[#8B2648]" />}
                         </div>
                         <div>
-                          <div className={`text-xs font-bold ${theme.textPreview}`}>
+                          <div className={`text-xs font-bold text-[#3B0D1E]`}>
                             {theme.label}
                           </div>
-                          <div className="text-[10px] text-brand-cream-300/60 capitalize">
+                          <div className="text-[10px] text-[#8B2648]/80 capitalize">
                             Theme: {theme.id}
                           </div>
                         </div>
@@ -477,143 +476,143 @@ function CustomizerContent() {
                   })}
                 </div>
               </div>
-            </Card>
+            </div>
           )}
 
           {/* TAB 2: INTRO & REVEAL */}
           {activeTab === 'intro' && (
-            <Card variant="romantic" glow="soft" padded className="space-y-6">
+            <div className="bg-[#FFFDF9] border border-[#F8B4C8] rounded-2xl p-6 shadow-romantic space-y-6">
               <div>
                 <h3 className="text-lg font-bold font-display text-gradient-romantic flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-brand-gold-300" />
+                  <Sparkles className="w-4 h-4 text-[#D9A441]" />
                   Landing Intro & Reveal Scene Copy
                 </h3>
-                <p className="text-xs text-brand-cream-200/70 mt-0.5">
+                <p className="text-xs text-[#8B2648] mt-0.5">
                   Set the opening emotional tone and the dramatic birthday reveal announcement.
                 </p>
               </div>
 
               {/* Intro Scene Section */}
               <div className="space-y-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-pink-300 border-b border-brand-pink-400/20 pb-1 block">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#8B2648] border-b border-[#F8B4C8] pb-1 block">
                   Scene 1: Intro / Mysterious Gift Landing
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Intro Badge Text</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Intro Badge Text</label>
                     <input
                       type="text"
                       value={config.intro.badgeText}
                       onChange={(e) => handleNestedFieldChange('intro', 'badgeText', e.target.value)}
                       placeholder="e.g. A Special Birthday Surprise ✨"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Intro Greeting Headline</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Intro Greeting Headline</label>
                     <input
                       type="text"
                       value={config.intro.greeting}
                       onChange={(e) => handleNestedFieldChange('intro', 'greeting', e.target.value)}
-                      placeholder="e.g. Hey Sarah 🌸"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      placeholder="e.g. Hey Meghna 🌸"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100">Intro Subheading Description</label>
+                  <label className="text-xs font-semibold text-[#3B0D1E]">Intro Subheading Description</label>
                   <textarea
                     rows={2}
                     value={config.intro.subheading}
                     onChange={(e) => handleNestedFieldChange('intro', 'subheading', e.target.value)}
                     placeholder="e.g. Someone created a digital universe just for your special day..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100">Intro CTA Button Text</label>
+                  <label className="text-xs font-semibold text-[#3B0D1E]">Intro CTA Button Text</label>
                   <input
                     type="text"
                     value={config.intro.ctaText}
                     onChange={(e) => handleNestedFieldChange('intro', 'ctaText', e.target.value)}
                     placeholder="e.g. Open Your Gift ✨"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
               </div>
 
               {/* Reveal Scene Section */}
-              <div className="space-y-4 pt-4 border-t border-brand-white-translucent">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-gold-300 border-b border-brand-gold-400/20 pb-1 block">
+              <div className="space-y-4 pt-4 border-t border-[#F8B4C8]/40">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#D9A441] border-b border-[#D9A441]/30 pb-1 block">
                   Scene 2: The Birthday Reveal
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Reveal Headline</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Reveal Headline</label>
                     <input
                       type="text"
                       value={config.reveal.headline}
                       onChange={(e) => handleNestedFieldChange('reveal', 'headline', e.target.value)}
-                      placeholder="e.g. Happy Birthday! 🎂✨"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      placeholder="e.g. Happy Birthday, Meghna! 🎂✨"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Reveal Subheadline</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Reveal Subheadline</label>
                     <input
                       type="text"
                       value={config.reveal.subheadline}
                       onChange={(e) => handleNestedFieldChange('reveal', 'subheadline', e.target.value)}
                       placeholder="e.g. Today is all about celebrating you."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100">Reveal Highlight Quote</label>
+                  <label className="text-xs font-semibold text-[#3B0D1E]">Reveal Highlight Quote</label>
                   <input
                     type="text"
                     value={config.reveal.highlightText}
                     onChange={(e) => handleNestedFieldChange('reveal', 'highlightText', e.target.value)}
                     placeholder="e.g. May this year bring you endless laughter and joy."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
               </div>
-            </Card>
+            </div>
           )}
 
           {/* TAB 3: CAKE & BALLOONS */}
           {activeTab === 'cake' && (
-            <Card variant="romantic" glow="soft" padded className="space-y-6">
+            <div className="bg-[#FFFDF9] border border-[#F8B4C8] rounded-2xl p-6 shadow-romantic space-y-6">
               <div>
                 <h3 className="text-lg font-bold font-display text-gradient-romantic flex items-center gap-2">
-                  <Cake className="w-4 h-4 text-brand-pink-400" />
+                  <Cake className="w-4 h-4 text-[#E86A92]" />
                   Interactive Cake & Balloon Mini-Games
                 </h3>
-                <p className="text-xs text-brand-cream-200/70 mt-0.5">
+                <p className="text-xs text-[#8B2648] mt-0.5">
                   Configure candle blowing count, cake flavor, and floating secret balloon messages.
                 </p>
               </div>
 
               {/* Cake Settings */}
               <div className="space-y-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-pink-300 border-b border-brand-pink-400/20 pb-1 block">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#8B2648] border-b border-[#F8B4C8] pb-1 block">
                   Scene 3: Birthday Cake
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100 flex items-center justify-between">
+                    <label className="text-xs font-semibold text-[#3B0D1E] flex items-center justify-between">
                       <span>Candle Count: {config.cake.candleCount}</span>
-                      <span className="text-[10px] text-brand-gold-300">1 to 5 candles</span>
+                      <span className="text-[10px] text-[#D9A441]">1 to 5 candles</span>
                     </label>
                     <input
                       type="range"
@@ -622,50 +621,50 @@ function CustomizerContent() {
                       step={1}
                       value={config.cake.candleCount}
                       onChange={(e) => handleNestedFieldChange('cake', 'candleCount', parseInt(e.target.value, 10))}
-                      className="w-full accent-brand-pink-400 cursor-pointer"
+                      className="w-full accent-[#E86A92] cursor-pointer"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Cake Flavor & Description</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Cake Flavor & Description</label>
                     <input
                       type="text"
                       value={config.cake.flavor}
                       onChange={(e) => handleNestedFieldChange('cake', 'flavor', e.target.value)}
-                      placeholder="e.g. Vanilla Strawberry Velvet Cake"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      placeholder="e.g. Strawberry Shortcake with White Velvet Cream 🍓🍰"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Wish Prompt</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Wish Prompt</label>
                     <input
                       type="text"
                       value={config.cake.wishPrompt}
                       onChange={(e) => handleNestedFieldChange('cake', 'wishPrompt', e.target.value)}
                       placeholder="e.g. Close your eyes, make a wish..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Blow Prompt</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Blow Prompt</label>
                     <input
                       type="text"
                       value={config.cake.blowPrompt}
                       onChange={(e) => handleNestedFieldChange('cake', 'blowPrompt', e.target.value)}
                       placeholder="e.g. Tap the candles to blow them out! 🎂"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Balloon Settings */}
-              <div className="space-y-4 pt-4 border-t border-brand-white-translucent">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-gold-300 border-b border-brand-gold-400/20 pb-1 block">
+              <div className="space-y-4 pt-4 border-t border-[#F8B4C8]/40">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#D9A441] border-b border-[#D9A441]/30 pb-1 block">
                   Scene 4: Balloon Secret Messages ({config.balloons.items.length} Balloons)
                 </span>
 
@@ -673,7 +672,7 @@ function CustomizerContent() {
                   {config.balloons.items.map((balloon, index) => (
                     <div
                       key={balloon.id || index}
-                      className="p-3.5 rounded-xl bg-brand-purple-950/70 border border-brand-white-translucent flex flex-col sm:flex-row items-start sm:items-center gap-3"
+                      className="p-3.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] flex flex-col sm:flex-row items-start sm:items-center gap-3"
                     >
                       <div className="flex items-center gap-2 shrink-0">
                         <input
@@ -684,10 +683,10 @@ function CustomizerContent() {
                             newItems[index] = { ...newItems[index], emoji: e.target.value };
                             handleNestedFieldChange('balloons', 'items', newItems);
                           }}
-                          className="w-10 h-10 text-center text-lg rounded-lg bg-brand-purple-900 border border-brand-pink-400/30 focus:outline-none"
+                          className="w-10 h-10 text-center text-lg rounded-lg bg-[#FFFDF9] border border-[#F8B4C8] focus:outline-none text-[#3B0D1E]"
                           title="Balloon Emoji"
                         />
-                        <span className="text-xs font-semibold text-brand-cream-200">
+                        <span className="text-xs font-semibold text-[#8B2648]">
                           Balloon #{index + 1}
                         </span>
                       </div>
@@ -702,62 +701,62 @@ function CustomizerContent() {
                             handleNestedFieldChange('balloons', 'items', newItems);
                           }}
                           placeholder="Secret message revealed when popped..."
-                          className="w-full px-3 py-2 rounded-lg bg-brand-purple-900/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-xs text-brand-cream-50"
+                          className="w-full px-3 py-2 rounded-lg bg-[#FFFDF9] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-xs text-[#3B0D1E]"
                         />
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            </Card>
+            </div>
           )}
 
           {/* TAB 4: LETTER & CELEBRATION */}
           {activeTab === 'letter' && (
-            <Card variant="romantic" glow="soft" padded className="space-y-6">
+            <div className="bg-[#FFFDF9] border border-[#F8B4C8] rounded-2xl p-6 shadow-romantic space-y-6">
               <div>
                 <h3 className="text-lg font-bold font-display text-gradient-romantic flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-brand-gold-300" />
+                  <Mail className="w-4 h-4 text-[#D9A441]" />
                   Personal Letter & Final Celebration
                 </h3>
-                <p className="text-xs text-brand-cream-200/70 mt-0.5">
+                <p className="text-xs text-[#8B2648] mt-0.5">
                   Write the heartfelt personal letter and customize the final celebration message.
                 </p>
               </div>
 
               {/* Letter Section */}
               <div className="space-y-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-pink-300 border-b border-brand-pink-400/20 pb-1 block">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#8B2648] border-b border-[#F8B4C8] pb-1 block">
                   Scene 7: Personal Letter Experience
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Letter Title</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Letter Title</label>
                     <input
                       type="text"
                       value={config.letter.title}
                       onChange={(e) => handleNestedFieldChange('letter', 'title', e.target.value)}
                       placeholder="e.g. A Letter For You"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Letter Salutation</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Letter Salutation</label>
                     <input
                       type="text"
                       value={config.letter.salutation}
                       onChange={(e) => handleNestedFieldChange('letter', 'salutation', e.target.value)}
-                      placeholder="e.g. Dearest Sarah,"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      placeholder="e.g. Dearest Meghna,"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
                 </div>
 
                 {/* Letter Paragraphs */}
                 <div className="space-y-3">
-                  <label className="text-xs font-semibold text-brand-cream-100 flex items-center justify-between">
+                  <label className="text-xs font-semibold text-[#3B0D1E] flex items-center justify-between">
                     <span>Letter Paragraphs ({config.letter.paragraphs.length})</span>
                     <button
                       type="button"
@@ -767,7 +766,7 @@ function CustomizerContent() {
                           'Another heartfelt memory or thought for your special day...',
                         ]);
                       }}
-                      className="text-[11px] text-brand-pink-300 hover:text-white flex items-center gap-1 font-semibold"
+                      className="text-[11px] text-[#E86A92] hover:text-[#8B2648] flex items-center gap-1 font-semibold"
                     >
                       <Plus className="w-3 h-3" /> Add Paragraph
                     </button>
@@ -784,7 +783,7 @@ function CustomizerContent() {
                           handleNestedFieldChange('letter', 'paragraphs', newParas);
                         }}
                         placeholder={`Paragraph ${index + 1}...`}
-                        className="flex-1 px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-xs sm:text-sm text-brand-cream-50 leading-relaxed"
+                        className="flex-1 px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-xs sm:text-sm text-[#3B0D1E] leading-relaxed"
                       />
                       {config.letter.paragraphs.length > 1 && (
                         <button
@@ -793,7 +792,7 @@ function CustomizerContent() {
                             const newParas = config.letter.paragraphs.filter((_, i) => i !== index);
                             handleNestedFieldChange('letter', 'paragraphs', newParas);
                           }}
-                          className="p-2 text-brand-cream-300/40 hover:text-red-400 transition-colors"
+                          className="p-2 text-[#8B2648]/40 hover:text-red-500 transition-colors"
                           title="Remove paragraph"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -804,94 +803,94 @@ function CustomizerContent() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100">Highlight Handwritten Quote</label>
+                  <label className="text-xs font-semibold text-[#3B0D1E]">Highlight Handwritten Quote</label>
                   <input
                     type="text"
                     value={config.letter.highlightQuote}
                     onChange={(e) => handleNestedFieldChange('letter', 'highlightQuote', e.target.value)}
                     placeholder="e.g. Some people make the world more special just by being in it."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Letter Closing</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Letter Closing</label>
                     <input
                       type="text"
                       value={config.letter.closing}
                       onChange={(e) => handleNestedFieldChange('letter', 'closing', e.target.value)}
                       placeholder="e.g. Forever and always,"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Letter Signature</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Letter Signature</label>
                     <input
                       type="text"
                       value={config.letter.signature}
                       onChange={(e) => handleNestedFieldChange('letter', 'signature', e.target.value)}
                       placeholder="e.g. Alex ✨"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Celebration Section */}
-              <div className="space-y-4 pt-4 border-t border-brand-white-translucent">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-gold-300 border-b border-brand-gold-400/20 pb-1 block">
+              <div className="space-y-4 pt-4 border-t border-[#F8B4C8]/40">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#D9A441] border-b border-[#D9A441]/30 pb-1 block">
                   Scene 8: Final Celebration Payoff
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Celebration Title</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Celebration Title</label>
                     <input
                       type="text"
                       value={config.celebration.title}
                       onChange={(e) => handleNestedFieldChange('celebration', 'title', e.target.value)}
                       placeholder="e.g. Forever Cherished"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-brand-cream-100">Celebration Subtitle</label>
+                    <label className="text-xs font-semibold text-[#3B0D1E]">Celebration Subtitle</label>
                     <input
                       type="text"
                       value={config.celebration.subtitle}
                       onChange={(e) => handleNestedFieldChange('celebration', 'subtitle', e.target.value)}
                       placeholder="e.g. May your year ahead be as bright as your smile."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-brand-cream-100">Replay Button Text</label>
+                  <label className="text-xs font-semibold text-[#3B0D1E]">Replay Button Text</label>
                   <input
                     type="text"
                     value={config.celebration.replayButtonText}
                     onChange={(e) => handleNestedFieldChange('celebration', 'replayButtonText', e.target.value)}
                     placeholder="e.g. Experience Again 🔄"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-brand-purple-950/80 border border-brand-white-translucent focus:border-brand-pink-400 focus:outline-none text-sm text-brand-cream-50"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
               </div>
-            </Card>
+            </div>
           )}
 
           {/* TAB 5: JSON IMPORT / EXPORT */}
           {activeTab === 'json' && (
-            <Card variant="romantic" glow="soft" padded className="space-y-6">
+            <div className="bg-[#FFFDF9] border border-[#F8B4C8] rounded-2xl p-6 shadow-romantic space-y-6">
               <div>
                 <h3 className="text-lg font-bold font-display text-gradient-romantic flex items-center gap-2">
-                  <FileCode className="w-4 h-4 text-brand-gold-300" />
+                  <FileCode className="w-4 h-4 text-[#D9A441]" />
                   JSON Configuration Import & Export
                 </h3>
-                <p className="text-xs text-brand-cream-200/70 mt-0.5">
+                <p className="text-xs text-[#8B2648] mt-0.5">
                   Export your personalized configuration to share, or import existing JSON data with instant schema validation.
                 </p>
               </div>
@@ -899,25 +898,25 @@ function CustomizerContent() {
               {/* Export Panel */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-brand-pink-300">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#8B2648]">
                     Export Current Configuration
                   </span>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={handleCopyJSON}
-                      className="px-2.5 py-1 rounded-lg bg-brand-purple-900 border border-brand-pink-400/30 hover:bg-brand-pink-400/20 text-brand-cream-100 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-[#FCE4EC] border border-[#F8B4C8] hover:bg-[#F8B4C8] text-[#8B2648] text-xs font-semibold flex items-center gap-1.5 transition-colors"
                     >
-                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-brand-pink-300" />}
+                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-[#E86A92]" />}
                       <span>{copied ? 'Copied!' : 'Copy JSON'}</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={handleDownloadJSON}
-                      className="px-2.5 py-1 rounded-lg bg-brand-purple-900 border border-brand-gold-400/30 hover:bg-brand-gold-400/20 text-brand-cream-100 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-[#FFF5EB] border border-[#D9A441]/40 hover:bg-[#D9A441]/20 text-[#8B2648] text-xs font-semibold flex items-center gap-1.5 transition-colors"
                     >
-                      <Download className="w-3.5 h-3.5 text-brand-gold-300" />
+                      <Download className="w-3.5 h-3.5 text-[#D9A441]" />
                       <span>Download .json</span>
                     </button>
                   </div>
@@ -927,13 +926,13 @@ function CustomizerContent() {
                   readOnly
                   rows={8}
                   value={exportConfigJSON()}
-                  className="w-full font-mono text-xs p-3 rounded-xl bg-brand-purple-950/90 border border-brand-white-translucent text-brand-cream-200/80 focus:outline-none selection:bg-brand-pink-500 selection:text-white"
+                  className="w-full font-mono text-xs p-3 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] text-[#3B0D1E] focus:outline-none selection:bg-[#E86A92] selection:text-white"
                 />
               </div>
 
               {/* Import Panel */}
-              <div className="space-y-3 pt-4 border-t border-brand-white-translucent">
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-gold-300 block">
+              <div className="space-y-3 pt-4 border-t border-[#F8B4C8]/40">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#D9A441] block">
                   Import Custom JSON Configuration
                 </span>
 
@@ -942,28 +941,28 @@ function CustomizerContent() {
                   value={importText}
                   onChange={(e) => setImportText(e.target.value)}
                   placeholder="Paste your JSON configuration object here..."
-                  className="w-full font-mono text-xs p-3 rounded-xl bg-brand-purple-950/90 border border-brand-white-translucent text-brand-cream-50 focus:border-brand-pink-400 focus:outline-none"
+                  className="w-full font-mono text-xs p-3 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] text-[#3B0D1E] focus:border-[#E86A92] focus:outline-none"
                 />
 
                 {importStatus.type !== 'idle' && (
                   <div
                     className={`p-3 rounded-xl text-xs flex items-center gap-2 ${
                       importStatus.type === 'success'
-                        ? 'bg-emerald-950/60 border border-emerald-500/40 text-emerald-200'
-                        : 'bg-red-950/60 border border-red-500/40 text-red-200'
+                        ? 'bg-emerald-50 border border-emerald-400 text-emerald-800'
+                        : 'bg-red-50 border border-red-400 text-red-800'
                     }`}
                   >
                     {importStatus.type === 'success' ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                     ) : (
-                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                      <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                     )}
                     <span>{importStatus.message}</span>
                   </div>
                 )}
 
                 <Button
-                  variant="gold"
+                  variant="romantic"
                   size="sm"
                   onClick={handleImportSubmit}
                   className="font-bold flex items-center gap-1.5"
@@ -972,7 +971,7 @@ function CustomizerContent() {
                   <span>Validate & Apply Configuration</span>
                 </Button>
               </div>
-            </Card>
+            </div>
           )}
         </div>
 
@@ -980,12 +979,12 @@ function CustomizerContent() {
         <div className={`lg:col-span-5 flex flex-col gap-4 lg:sticky lg:top-20 ${mobilePreviewOpen ? 'flex' : 'hidden lg:flex'}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Eye className="w-4 h-4 text-brand-pink-400" />
-              <h2 className="text-sm font-bold font-display text-brand-cream-100">
+              <Eye className="w-4 h-4 text-[#E86A92]" />
+              <h2 className="text-sm font-bold font-display text-[#3B0D1E]">
                 Live Interactive Preview
               </h2>
             </div>
-            <span className="text-[10px] text-brand-gold-300 font-semibold uppercase tracking-wider bg-brand-gold-500/10 border border-brand-gold-400/20 px-2 py-0.5 rounded-full">
+            <span className="text-[10px] text-[#8B2648] font-semibold uppercase tracking-wider bg-[#FFF5EB] border border-[#D9A441]/40 px-2 py-0.5 rounded-full">
               Real-Time Sync
             </span>
           </div>
@@ -994,19 +993,19 @@ function CustomizerContent() {
           <LivePreview config={config} />
 
           {/* Quick Launch Card */}
-          <div className="p-4 rounded-2xl bg-brand-purple-900/50 border border-brand-white-translucent flex items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl bg-[#FFFDF9] border border-[#F8B4C8] shadow-sm flex items-center justify-between gap-4">
             <div className="space-y-0.5">
-              <div className="text-xs font-bold text-brand-cream-50">
-                Ready to surprise {config.recipient.name || 'them'}?
+              <div className="text-xs font-bold text-[#3B0D1E]">
+                Ready to surprise {config.recipient.name || 'Meghna'}?
               </div>
-              <div className="text-[11px] text-brand-cream-300/70">
+              <div className="text-[11px] text-[#8B2648]">
                 Changes are automatically active at the home experience.
               </div>
             </div>
 
             <Link
               href="/"
-              className="px-3.5 py-2 rounded-xl bg-brand-pink-500 hover:bg-brand-pink-400 text-brand-purple-950 font-bold text-xs shadow-glow-pink-soft hover:shadow-glow-pink transition-all flex items-center gap-1.5 shrink-0"
+              className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#E86A92] to-[#D9A441] text-white font-bold text-xs shadow-romantic hover:shadow-glow-pink transition-all flex items-center gap-1.5 shrink-0"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>Launch</span>

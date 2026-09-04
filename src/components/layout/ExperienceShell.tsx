@@ -15,7 +15,7 @@ export function ExperienceShell() {
   const config = useBirthdayConfig();
 
   return (
-    <SceneContainer className="text-brand-cream-50 relative selection:bg-brand-pink-500 selection:text-white">
+    <SceneContainer className="text-[var(--text-primary)] relative selection:bg-brand-blush selection:text-brand-berry">
       {/* Cinematic Dynamic Background Ambient Layers */}
       <BackgroundLayer theme={config.theme} />
 

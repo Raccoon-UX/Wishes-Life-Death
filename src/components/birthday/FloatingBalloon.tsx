@@ -22,10 +22,10 @@ export function FloatingBalloon({
   const prefersReducedMotion = useReducedMotion();
 
   const colorGradients = {
-    pink: 'from-brand-pink-300 via-brand-pink-400 to-brand-pink-600',
-    gold: 'from-brand-gold-300 via-brand-gold-400 to-brand-gold-600',
-    violet: 'from-brand-violet-300 via-brand-violet-400 to-brand-violet-600',
-  }[item.color as 'pink' | 'gold' | 'violet'] || 'from-brand-pink-300 to-brand-violet-500';
+    pink: 'from-[#FFF5F8] via-[#F8B4C8] to-[#E86A92]',
+    gold: 'from-[#FFFDF9] via-[#FCE4AB] to-[#D9A441]',
+    violet: 'from-[#FDF2F8] via-[#E8DDF5] to-[#B89EE2]',
+  }[item.color as 'pink' | 'gold' | 'violet'] || 'from-[#FFF5F8] via-[#F8B4C8] to-[#E86A92]';
 
   const glowShadow = {
     pink: 'shadow-glow-pink',
@@ -36,10 +36,10 @@ export function FloatingBalloon({
   if (isPopped) {
     return (
       <div className="w-20 h-28 sm:w-24 sm:h-32 flex flex-col items-center justify-center opacity-40 select-none">
-        <div className="w-10 h-10 rounded-full bg-brand-gold-400/20 border border-brand-gold-400/30 flex items-center justify-center text-brand-gold-300">
+        <div className="w-10 h-10 rounded-full bg-white/80 border border-brand-rose/40 flex items-center justify-center text-brand-rose shadow-subtle">
           <Sparkles className="w-5 h-5" />
         </div>
-        <span className="text-[10px] text-brand-cream-300 font-medium mt-1">Popped ✨</span>
+        <span className="text-[10px] text-brand-muted font-bold mt-1">Popped ✨</span>
       </div>
     );
   }
@@ -65,33 +65,33 @@ export function FloatingBalloon({
         duration: 3.2 + (index % 3) * 0.7,
         ease: 'easeInOut',
       }}
-      className="relative group flex flex-col items-center min-w-[64px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-400 rounded-full p-2 cursor-pointer select-none"
+      className="relative group flex flex-col items-center min-w-[64px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-rose rounded-full p-2 cursor-pointer select-none"
     >
       {/* 2.5D BALLOON OVAL SPHERE */}
       <div
-        className={`w-18 h-24 sm:w-22 sm:h-28 rounded-[50%_50%_50%_50%/40%_40%_60%_60%] bg-gradient-to-tr ${colorGradients} ${glowShadow} relative flex items-center justify-center border border-white/30 transform-gpu transition-shadow duration-300`}
+        className={`w-18 h-24 sm:w-22 sm:h-28 rounded-[50%_50%_50%_50%/40%_40%_60%_60%] bg-gradient-to-tr ${colorGradients} ${glowShadow} relative flex items-center justify-center border border-white/60 transform-gpu transition-shadow duration-300`}
       >
         {/* Curved Specular 3D Highlight */}
-        <div className="absolute top-2.5 left-3 w-5 h-8 rounded-full bg-white/50 blur-[1px] rotate-[-30deg]" />
+        <div className="absolute top-2.5 left-3 w-5 h-8 rounded-full bg-white/70 blur-[1px] rotate-[-30deg]" />
         
         {/* Soft Secondary Rim Light */}
-        <div className="absolute bottom-3 right-3 w-4 h-6 rounded-full bg-white/20 blur-[2px]" />
+        <div className="absolute bottom-3 right-3 w-4 h-6 rounded-full bg-white/40 blur-[2px]" />
 
         {/* Emoji Symbol */}
-        <span className="text-2xl sm:text-3xl drop-shadow-md select-none group-hover:scale-125 transition-transform duration-200">
+        <span className="text-2xl sm:text-3xl drop-shadow-sm select-none group-hover:scale-125 transition-transform duration-200">
           {item.emoji}
         </span>
 
         {/* Balloon Tied Knot */}
-        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-2.5 bg-brand-purple-900/60 border border-white/20 rounded-b-sm" />
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-2.5 bg-brand-rose/60 border border-white/40 rounded-b-sm" />
       </div>
 
       {/* Dangling String SVG */}
-      <svg width="24" height="36" viewBox="0 0 24 36" className="opacity-65 overflow-visible">
+      <svg width="24" height="36" viewBox="0 0 24 36" className="opacity-75 overflow-visible">
         <path
           d="M12 0 Q6 12, 18 22 T12 36"
           fill="none"
-          stroke="#FFFDF9"
+          stroke="#B83B68"
           strokeWidth="1.5"
           strokeDasharray="4 2"
         />
