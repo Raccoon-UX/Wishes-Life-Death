@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useExperience } from '@/hooks/useExperience';
 
 const AUDIO_SRC = '/audio/arj-kiya-hai.mp3';
-const TARGET_VOLUME = 0.20; // Soft/background level between 0.18 and 0.25
+const TARGET_VOLUME = 1.0; // Full Volume (100%)
 const STORAGE_KEY = 'birthday_music_muted';
 
 export function AudioController() {
@@ -50,6 +50,7 @@ export function AudioController() {
       // Re-trigger playback if interrupted:
       if (!stateRef.current.isMuted) {
         audio.currentTime = 0;
+        audio.volume = TARGET_VOLUME;
         audio.play().catch(() => {});
       }
     };
@@ -65,16 +66,26 @@ export function AudioController() {
     audio.addEventListener('error', handleError);
 
     // Setup first interaction fallback listener
-    const interactionEvents = ['pointerdown', 'touchstart', 'click', 'keydown'] as const;
+    const interactionEvents = [
+      'pointerdown',
+      'touchstart',
+      'touchend',
+      'click',
+      'keydown',
+      'pointermove',
+      'scroll',
+    ] as const;
 
     const removeInteractionListeners = () => {
       interactionEvents.forEach((evt) => {
         window.removeEventListener(evt, handleFirstInteraction);
+        document.removeEventListener(evt, handleFirstInteraction);
       });
     };
 
     const handleFirstInteraction = () => {
       if (audioRef.current && !stateRef.current.isMuted) {
+        audioRef.current.volume = TARGET_VOLUME;
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           playPromise
@@ -90,23 +101,26 @@ export function AudioController() {
       }
     };
 
-    // Attempt immediate autoplay if not muted
+    // Attempt immediate autoplay on page open if not muted
     if (!savedMutePreference) {
+      audio.volume = TARGET_VOLUME;
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            // Autoplay succeeded immediately
+            // Autoplay succeeded immediately on page open!
           })
           .catch(() => {
-            // Autoplay was prevented by browser policy; attach one-time user interaction listener
+            // Autoplay was blocked by browser policy; attach interaction listeners for immediate start
             interactionEvents.forEach((evt) => {
               window.addEventListener(evt, handleFirstInteraction, { passive: true });
+              document.addEventListener(evt, handleFirstInteraction, { passive: true });
             });
           });
       } else {
         interactionEvents.forEach((evt) => {
           window.addEventListener(evt, handleFirstInteraction, { passive: true });
+          document.addEventListener(evt, handleFirstInteraction, { passive: true });
         });
       }
     }
@@ -138,6 +152,7 @@ export function AudioController() {
         // localStorage write error handled safely
       }
     } else {
+      audio.volume = TARGET_VOLUME;
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
