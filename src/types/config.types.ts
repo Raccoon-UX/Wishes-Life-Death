@@ -80,7 +80,10 @@ export interface MemoryItem {
   yearOrTag: string;
   title: string;
   description: string;
+  imageUrl?: string;
   imagePlaceholder?: string;
+  linkUrl?: string;
+  linkText?: string;
 }
 
 export interface MemoryConfig {
