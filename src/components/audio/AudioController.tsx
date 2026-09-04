@@ -1,69 +1,156 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import { useExperience } from '@/hooks/useExperience';
 
+const AUDIO_SRC = '/audio/arj-kiya-hai.mp3';
+const TARGET_VOLUME = 0.20; // Soft/background level between 0.18 and 0.25
+const STORAGE_KEY = 'birthday_music_muted';
+
 export function AudioController() {
-  const { state } = useExperience();
-  const audioContextRef = useRef<AudioContext | null>(null);
+  const { state, dispatch } = useExperience();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const stateRef = useRef(state);
+  stateRef.current = state;
+  const isInitializedRef = useRef(false);
 
-  // Soft celebratory chime synthesizer using Web Audio API (zero external asset requirement)
-  const playCelebrationChime = useCallback(() => {
-    if (state.isMuted) return;
+  // 1. Initialize Audio Element and Autoplay / Interaction Fallback
+  useEffect(() => {
+    if (audioRef.current) return;
+
+    // Check user's saved preference
+    let savedMutePreference = false;
     try {
-      const AudioCtx =
-        window.AudioContext ||
-        (window as unknown as { webkitAudioContext: typeof AudioContext })
-          .webkitAudioContext;
-      if (!AudioCtx) return;
-
-      if (!audioContextRef.current) {
-        audioContextRef.current = new AudioCtx();
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === 'true') {
+        savedMutePreference = true;
+        dispatch({ type: 'SET_MUTED', payload: true });
       }
-      const ctx = audioContextRef.current;
-      if (ctx.state === 'suspended') {
-        ctx.resume();
-      }
-
-      // Harmonious chime chord: C5, E5, G5, C6
-      const notes = [523.25, 659.25, 783.99, 1046.5];
-      notes.forEach((freq, idx) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.12);
-
-        gain.gain.setValueAtTime(0, ctx.currentTime + idx * 0.12);
-        gain.gain.linearRampToValueAtTime(
-          0.08,
-          ctx.currentTime + idx * 0.12 + 0.05
-        );
-        gain.gain.exponentialRampToValueAtTime(
-          0.001,
-          ctx.currentTime + idx * 0.12 + 1.2
-        );
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start(ctx.currentTime + idx * 0.12);
-        osc.stop(ctx.currentTime + idx * 0.12 + 1.3);
-      });
     } catch {
-      // Gracefully silent if Web Audio is restricted
+      // localStorage may be unavailable in some browser modes
+    }
+
+    // Create persistent Audio instance
+    const audio = new Audio(AUDIO_SRC);
+    audio.loop = true;
+    audio.preload = 'auto';
+    audio.volume = TARGET_VOLUME;
+    audioRef.current = audio;
+
+    const handlePlay = () => {
+      dispatch({ type: 'SET_MUSIC_PLAYING', payload: true });
+    };
+
+    const handlePause = () => {
+      dispatch({ type: 'SET_MUSIC_PLAYING', payload: false });
+    };
+
+    const handleEnded = () => {
+      // Modern browsers loop automatically when audio.loop is true.
+      // Re-trigger playback if interrupted:
+      if (!stateRef.current.isMuted) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+      }
+    };
+
+    const handleError = () => {
+      // Gracefully handle missing asset or network error without throwing uncaught exceptions
+      dispatch({ type: 'SET_MUSIC_PLAYING', payload: false });
+    };
+
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
+
+    // Setup first interaction fallback listener
+    const interactionEvents = ['pointerdown', 'touchstart', 'click', 'keydown'] as const;
+
+    const removeInteractionListeners = () => {
+      interactionEvents.forEach((evt) => {
+        window.removeEventListener(evt, handleFirstInteraction);
+      });
+    };
+
+    const handleFirstInteraction = () => {
+      if (audioRef.current && !stateRef.current.isMuted) {
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              removeInteractionListeners();
+            })
+            .catch(() => {
+              // Interaction handling pending
+            });
+        }
+      } else {
+        removeInteractionListeners();
+      }
+    };
+
+    // Attempt immediate autoplay if not muted
+    if (!savedMutePreference) {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            // Autoplay succeeded immediately
+          })
+          .catch(() => {
+            // Autoplay was prevented by browser policy; attach one-time user interaction listener
+            interactionEvents.forEach((evt) => {
+              window.addEventListener(evt, handleFirstInteraction, { passive: true });
+            });
+          });
+      } else {
+        interactionEvents.forEach((evt) => {
+          window.addEventListener(evt, handleFirstInteraction, { passive: true });
+        });
+      }
+    }
+
+    isInitializedRef.current = true;
+
+    return () => {
+      removeInteractionListeners();
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
+      audio.pause();
+      audioRef.current = null;
+    };
+  }, [dispatch]);
+
+  // 2. React to isMuted state changes (manual user toggle)
+  useEffect(() => {
+    if (!isInitializedRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (state.isMuted) {
+      audio.pause();
+      try {
+        localStorage.setItem(STORAGE_KEY, 'true');
+      } catch {
+        // localStorage write error handled safely
+      }
+    } else {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Play prevented
+        });
+      }
+      try {
+        localStorage.setItem(STORAGE_KEY, 'false');
+      } catch {
+        // localStorage write error handled safely
+      }
     }
   }, [state.isMuted]);
-
-  // Play chime when entering celebration scene
-  useEffect(() => {
-    if (state.currentScene === 'celebration' && !state.isMuted) {
-      const timer = setTimeout(() => {
-        playCelebrationChime();
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [state.currentScene, state.isMuted, playCelebrationChime]);
 
   return null;
 }
