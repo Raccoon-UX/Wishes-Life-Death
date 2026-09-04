@@ -1,17 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useExperience } from '@/hooks/useExperience';
 import { useBirthdayConfig } from '@/context/ConfigContext';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/common/Button';
-import { Container } from '@/components/common/Container';
 import { InteractiveCake } from '@/components/birthday/InteractiveCake';
-import { FloatingHeart } from '@/components/decorative/FloatingHeart';
-import { Sparkle } from '@/components/decorative/Sparkle';
-import { HandwrittenText } from '@/components/typography/HandwrittenText';
-import { ChevronLeft, ArrowRight, Sparkles, PartyPopper } from 'lucide-react';
+import { Sparkles, ArrowRight, ChevronLeft, Wind } from 'lucide-react';
 
 export function CakeScene() {
   const { nextScene, prevScene, completeScene, setInteractionFlag } = useExperience();
@@ -48,108 +42,107 @@ export function CakeScene() {
     nextScene();
   };
 
+  const litCount = candlesLit.filter(Boolean).length;
+  const recipientName = birthdayConfig.recipient.name || 'Sarah';
+
   return (
-    <Container className="flex flex-col items-center justify-center my-auto py-4">
-      <Card
-        variant={allExtinguished ? 'goldGlow' : 'romantic'}
-        glow={allExtinguished ? 'gold' : 'soft'}
-        padded={false}
-        className="w-full max-w-sm sm:max-w-md p-5 sm:p-7 flex flex-col items-center text-center relative overflow-hidden transition-all duration-500"
+    <div className="w-full max-w-lg mx-auto px-4 sm:px-6 py-6 flex flex-col items-center justify-center text-center select-none relative z-10">
+      
+      {/* 1. Header Prompt */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="space-y-2 mb-2"
       >
-        {/* Ambient background decoration */}
-        <div aria-hidden="true" className="absolute top-4 right-4 opacity-40 pointer-events-none">
-          <Sparkle size="md" color={allExtinguished ? 'gold' : 'pink'} />
-        </div>
-        <div aria-hidden="true" className="absolute bottom-4 left-4 opacity-40 pointer-events-none">
-          <FloatingHeart size="sm" color={allExtinguished ? 'gold' : 'pink'} />
-        </div>
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-pink-400/15 text-brand-pink-300 border border-brand-pink-400/30 shadow-soft">
+          <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
+          <span>{allExtinguished ? 'Wish Released' : 'Make A Wish'}</span>
+        </span>
 
-        {/* Scene Title / Status */}
-        <div className="space-y-1.5 mb-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase bg-brand-pink-400/15 text-brand-pink-300 border border-brand-pink-400/25">
-            <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
-            <span>Interactive Birthday Cake</span>
-          </span>
+        <h2 className="text-3xl sm:text-4xl font-display font-bold text-gradient-romantic">
+          {allExtinguished ? `Wish Granted, ${recipientName}!` : 'Close Your Eyes & Wish'}
+        </h2>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-display text-gradient-romantic">
-            {allExtinguished ? '? Wish Granted! ?' : 'Make A Wish ??'}
-          </h2>
+        <p className="text-xs sm:text-sm text-brand-cream-200/80 max-w-xs sm:max-w-sm mx-auto leading-relaxed">
+          {allExtinguished
+            ? 'Your birthday wish is officially on its way to the stars ✨'
+            : birthdayConfig.cake.blowPrompt || 'Tap the candles to blow them out!'}
+        </p>
+      </motion.div>
 
-          <p className="text-xs sm:text-sm text-brand-cream-200/80 max-w-xs mx-auto">
-            {allExtinguished
-              ? `Happy Birthday, ${birthdayConfig.recipient.name}! May all your dreams come true.`
-              : birthdayConfig.cake.blowPrompt}
-          </p>
-        </div>
+      {/* 2. Primary Hero Visual: Cake */}
+      <div className="w-full my-3 sm:my-5 flex justify-center">
+        <InteractiveCake
+          candleCount={totalCandles}
+          candlesLit={candlesLit}
+          onToggleCandle={handleToggleCandle}
+          flavor={birthdayConfig.cake.flavor}
+        />
+      </div>
 
-        {/* INTERACTIVE DIGITAL CAKE */}
-        <div className="w-full my-1 flex justify-center">
-          <InteractiveCake
-            candleCount={totalCandles}
-            candlesLit={candlesLit}
-            onToggleCandle={handleToggleCandle}
-            flavor={birthdayConfig.cake.flavor}
-          />
-        </div>
-
-        {/* Dynamic State Feedback Box */}
-        <div className="w-full my-3">
+      {/* 3. Interactive State Feedback & Quick Action */}
+      <div className="w-full max-w-xs mx-auto mb-6 min-h-[54px] flex flex-col items-center justify-center">
+        <AnimatePresence mode="wait">
           {allExtinguished ? (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              key="granted"
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-              className="bg-brand-purple-950/80 rounded-xl p-3.5 border border-brand-gold-400/40 shadow-glow-gold-soft space-y-1"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-full py-2 px-4 rounded-xl bg-brand-gold-500/10 border border-brand-gold-400/30 text-center"
             >
-              <div className="flex items-center justify-center gap-2 text-brand-gold-300 font-bold text-xs">
-                <PartyPopper className="w-4 h-4" />
-                <span>All candles blown out!</span>
-              </div>
-              <HandwrittenText size="md" variant="gold">
-                �Here is to your sweetest and brightest year yet!�
-              </HandwrittenText>
+              <p className="font-handwriting text-2xl sm:text-3xl text-brand-gold-300">
+                May all your dreams blossom this year ✨
+              </p>
             </motion.div>
           ) : (
-            <div className="flex items-center justify-center gap-2">
+            <motion.div
+              key="burning"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex items-center justify-center gap-3"
+            >
               <span className="text-xs text-brand-cream-200/70">
-                {candlesLit.filter(Boolean).length} of {totalCandles} candles burning
+                {litCount} of {totalCandles} candles lit
               </span>
               <button
                 type="button"
                 onClick={handleBlowAll}
-                className="text-[11px] font-semibold text-brand-gold-300 hover:text-brand-gold-200 underline underline-offset-2 px-2 py-1"
+                className="px-3 py-1 rounded-full bg-brand-pink-400/20 hover:bg-brand-pink-400/30 text-brand-pink-200 border border-brand-pink-400/30 text-xs font-semibold flex items-center gap-1.5 transition-all"
               >
-                Blow All Out
+                <Wind className="w-3.5 h-3.5 text-brand-pink-300" />
+                <span>Blow All Out</span>
               </button>
-            </div>
+            </motion.div>
           )}
-        </div>
+        </AnimatePresence>
+      </div>
 
-        {/* Navigation Action Buttons */}
-        <div className="w-full flex items-center justify-between gap-3 pt-1">
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={prevScene}
-            aria-label="Return to birthday reveal scene"
-            className="flex-1 flex items-center justify-center gap-1.5"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            <span>Previous</span>
-          </Button>
+      {/* 4. Navigation Actions */}
+      <div className="w-full max-w-xs flex flex-col items-center gap-3">
+        <button
+          type="button"
+          onClick={handleContinue}
+          aria-label="Proceed to balloon popping scene"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+        >
+          <span>Pop Birthday Balloons 🎈</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
+        </button>
 
-          <Button
-            variant={allExtinguished ? 'gold' : 'romantic'}
-            size="md"
-            onClick={handleContinue}
-            aria-label="Proceed to balloon popping scene"
-            className="flex-1 flex items-center justify-center gap-2 font-bold shadow-glow-pink"
-          >
-            <span>Pop Balloons</span>
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </div>
-      </Card>
-    </Container>
+        <button
+          type="button"
+          onClick={prevScene}
+          aria-label="Return to reveal scene"
+          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
+        >
+          <ChevronLeft className="w-3.5 h-3.5" />
+          <span>Back</span>
+        </button>
+      </div>
+    </div>
   );
 }

@@ -2,20 +2,16 @@
 
 import React from 'react';
 import { MemoryItem } from '@/types/config.types';
-import { cn } from '@/lib/utils';
-import { Sparkle } from '@/components/decorative/Sparkle';
-import { Camera, Calendar } from 'lucide-react';
+import { Camera, Calendar, Sparkles } from 'lucide-react';
 
 export interface MemoryCardProps {
   item: MemoryItem;
   index: number;
-  onSelect?: (item: MemoryItem) => void;
+  totalCount: number;
 }
 
-export function MemoryCard({ item, index, onSelect }: MemoryCardProps) {
-  const isEven = index % 2 === 0;
-
-  // Curated artistic gradient themes for memory placeholder photos
+export function MemoryCard({ item, index, totalCount }: MemoryCardProps) {
+  // Artistic themes for memory photo card
   const photoThemes = [
     'from-rose-500/80 via-purple-600/70 to-indigo-700/80',
     'from-amber-400/80 via-pink-500/70 to-purple-700/80',
@@ -23,68 +19,51 @@ export function MemoryCard({ item, index, onSelect }: MemoryCardProps) {
   ][index % 3];
 
   return (
-    <div
-      className={cn(
-        'w-full bg-brand-purple-950/80 rounded-2xl p-4 sm:p-5 border border-brand-white-translucent backdrop-blur-md shadow-card transition-all duration-300 hover:shadow-glow-pink-soft hover:border-brand-pink-400/40 relative group cursor-pointer',
-        isEven ? 'sm:rotate-[-0.75deg]' : 'sm:rotate-[0.75deg]'
-      )}
-      onClick={() => onSelect?.(item)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onSelect?.(item);
-        }
-      }}
-      aria-label={`Memory ${index + 1}: ${item.title}. Tap to view.`}
-    >
-      {/* Top corner paper tape / decorative highlight */}
+    <div className="w-full max-w-sm mx-auto bg-[#FFFDF9] text-neutral-900 rounded-2xl p-4 sm:p-5 shadow-dramatic relative select-none transform-gpu rotate-[-1deg] transition-all duration-300 hover:rotate-0">
+      
+      {/* Washi Tape Decor on Top */}
       <div
         aria-hidden="true"
-        className="absolute -top-2 left-6 w-12 h-3.5 bg-brand-white-glow rounded-sm -rotate-2 pointer-events-none opacity-60"
+        className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-amber-200/80 border border-amber-300/60 rounded-sm rotate-[-2deg] shadow-sm backdrop-blur-[1px] pointer-events-none"
       />
 
-      {/* POLAROID-STYLE PHOTO FRAME */}
-      <div className="w-full h-36 sm:h-44 rounded-xl bg-gradient-to-tr overflow-hidden relative mb-3 border border-white/10 flex items-center justify-center p-2 shadow-inner">
-        <div className={cn('absolute inset-0 bg-gradient-to-tr', photoThemes)} />
+      {/* POLAROID PHOTO FRAME */}
+      <div className="w-full h-48 sm:h-56 rounded-xl bg-neutral-950 overflow-hidden relative mb-4 border border-neutral-200/80 flex items-center justify-center p-3 shadow-inner">
+        <div className={`absolute inset-0 bg-gradient-to-tr ${photoThemes}`} />
 
-        {/* Ambient shimmer & vignette overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+        {/* Ambient vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
 
-        {/* Decorative Photo Illustration Badge */}
-        <div className="relative z-10 flex flex-col items-center justify-center gap-1.5 text-center text-white p-2 select-none">
-          <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center shadow-md">
-            <Camera className="w-4 h-4 text-brand-gold-300" />
+        {/* Center Photo Badge / Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center text-white p-2">
+          <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center shadow-lg">
+            <Camera className="w-6 h-6 text-amber-300" />
           </div>
-          <span className="text-[11px] font-semibold text-brand-cream-100/90 tracking-wide drop-shadow-sm">
+          <span className="text-sm font-display font-bold text-white tracking-wide drop-shadow-md">
             {item.title}
           </span>
         </div>
 
         {/* Top-right sparkle */}
-        <div className="absolute top-2 right-2">
-          <Sparkle size="sm" color="gold" />
+        <div className="absolute top-3 right-3 text-amber-300">
+          <Sparkles className="w-4 h-4" />
         </div>
       </div>
 
-      {/* MEMORY DETAILS */}
-      <div className="space-y-1.5 text-left">
+      {/* POLAROID HANDWRITTEN CAPTION */}
+      <div className="space-y-2 text-left px-1">
         <div className="flex items-center justify-between">
-          <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-brand-gold-400/20 text-brand-gold-300 border border-brand-gold-400/30">
-            <Calendar className="w-3 h-3" />
+          <span className="inline-flex items-center gap-1.5 text-[11px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-300">
+            <Calendar className="w-3 h-3 text-amber-600" />
             <span>{item.yearOrTag}</span>
           </span>
-          <span className="text-[10px] text-brand-pink-300/80 font-medium">
-            Tap to expand ??
+
+          <span className="text-xs font-handwriting text-neutral-500 font-bold">
+            Chapter {index + 1} of {totalCount}
           </span>
         </div>
 
-        <h3 className="text-sm sm:text-base font-bold font-display text-brand-cream-50 leading-snug">
-          {item.title}
-        </h3>
-
-        <p className="text-xs text-brand-cream-200/80 font-sans leading-relaxed line-clamp-3">
+        <p className="font-handwriting text-xl sm:text-2xl text-neutral-800 leading-snug pt-1">
           {item.description}
         </p>
       </div>

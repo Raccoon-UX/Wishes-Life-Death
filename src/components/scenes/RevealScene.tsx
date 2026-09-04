@@ -5,15 +5,7 @@ import { motion } from 'framer-motion';
 import { useExperience } from '@/hooks/useExperience';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useBirthdayConfig } from '@/context/ConfigContext';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/common/Button';
-import { Container } from '@/components/common/Container';
-import { FloatingHeart } from '@/components/decorative/FloatingHeart';
-import { Sparkle } from '@/components/decorative/Sparkle';
-import { Star } from '@/components/decorative/Star';
-import { OrnamentDivider } from '@/components/decorative/OrnamentDivider';
-import { HandwrittenText } from '@/components/typography/HandwrittenText';
-import { ChevronLeft, ArrowRight, Cake, Sparkles } from 'lucide-react';
+import { Sparkles, ArrowRight, ChevronLeft, Cake } from 'lucide-react';
 
 export function RevealScene() {
   const { nextScene, prevScene, completeScene } = useExperience();
@@ -27,110 +19,85 @@ export function RevealScene() {
 
   const getDelay = (seconds: number) => (prefersReducedMotion ? 0 : seconds);
 
+  const headline = birthdayConfig.reveal.headline || 'Happy Birthday!';
+  const subheadline = birthdayConfig.reveal.subheadline || 'Today is all about celebrating you.';
+  const highlightText = birthdayConfig.reveal.highlightText || 'May this year bring you endless joy and magic.';
+
   return (
-    <Container className="flex flex-col items-center justify-center my-auto py-4">
-      <Card
-        variant="romantic"
-        glow="medium"
-        padded={false}
-        className="w-full max-w-sm sm:max-w-md p-6 sm:p-8 flex flex-col items-center text-center relative overflow-hidden"
+    <div className="w-full max-w-xl mx-auto px-6 sm:px-8 py-8 flex flex-col items-center justify-center text-center select-none relative z-10">
+      
+      {/* 1. Dramatic Ambient Light Halo */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-gradient-to-tr from-brand-pink-500/15 via-brand-gold-500/15 to-brand-violet-500/15 blur-3xl pointer-events-none -z-10 animate-pulse-slow" />
+
+      {/* 2. Delicate Header Crown/Badge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: getDelay(0.2), ease: 'easeOut' }}
+        className="mb-6 flex items-center justify-center gap-2"
       >
-        {/* Ambient floating elements */}
-        <div aria-hidden="true" className="absolute top-4 left-4 opacity-40 pointer-events-none">
-          <Sparkle size="md" color="gold" delay="0.2s" />
-        </div>
-        <div aria-hidden="true" className="absolute top-8 right-6 opacity-40 pointer-events-none">
-          <FloatingHeart size="md" color="pink" delay="0.8s" />
-        </div>
-        <div aria-hidden="true" className="absolute bottom-6 right-6 opacity-40 pointer-events-none">
-          <Star size="sm" color="gold" />
-        </div>
+        <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-brand-gold-400/15 text-brand-gold-300 border border-brand-gold-400/30 shadow-glow-gold-soft backdrop-blur-sm">
+          <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
+          <span>The Grand Reveal</span>
+        </span>
+      </motion.div>
 
-        {/* 1. Header Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.45, delay: getDelay(0.15), ease: 'easeOut' }}
-          className="mb-4"
+      {/* 3. Hero Typography Headline */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: getDelay(0.4), ease: [0.22, 1, 0.36, 1] }}
+        className="space-y-4 mb-8"
+      >
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-black text-gradient-gold tracking-tight leading-[1.1] drop-shadow-lg">
+          {headline}
+        </h1>
+
+        <p className="text-sm sm:text-lg text-brand-cream-100/90 font-sans leading-relaxed max-w-md mx-auto">
+          {subheadline}
+        </p>
+      </motion.div>
+
+      {/* 4. Handwritten Floating Quote */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: getDelay(0.8), ease: 'easeOut' }}
+        className="max-w-md mx-auto mb-10 px-4 py-3 rounded-2xl bg-brand-purple-950/40 backdrop-blur-sm border border-brand-pink-400/20 shadow-soft"
+      >
+        <p className="font-handwriting text-2xl sm:text-3xl text-brand-pink-300 leading-snug">
+          &ldquo;{highlightText}&rdquo;
+        </p>
+      </motion.div>
+
+      {/* 5. Navigation Actions */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: getDelay(1.1), ease: [0.22, 1, 0.36, 1] }}
+        className="w-full max-w-xs flex flex-col items-center gap-3"
+      >
+        <button
+          type="button"
+          onClick={handleContinue}
+          aria-label="Proceed to birthday cake scene"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
         >
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase bg-brand-pink-400/20 text-brand-pink-200 border border-brand-pink-400/35 shadow-glow-pink-soft">
-            <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
-            <span>The Grand Reveal</span>
-          </span>
-        </motion.div>
+          <Cake className="w-5 h-5 text-brand-purple-950" />
+          <span>Make a Wish</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
+        </button>
 
-        {/* 2. Grand Birthday Statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: getDelay(0.3), ease: [0.22, 1, 0.36, 1] }}
-          className="space-y-2 mb-4"
+        <button
+          type="button"
+          onClick={prevScene}
+          aria-label="Return to intro scene"
+          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-gradient-romantic tracking-tight leading-tight">
-            {birthdayConfig.reveal.headline}
-          </h1>
-
-          <p className="text-xs sm:text-sm md:text-base text-brand-cream-100/90 font-sans leading-relaxed max-w-xs sm:max-w-sm mx-auto">
-            {birthdayConfig.reveal.subheadline}
-          </p>
-        </motion.div>
-
-        {/* 3. Highlight Message Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.45, delay: getDelay(0.5), ease: 'easeOut' }}
-          className="w-full bg-brand-purple-950/70 rounded-2xl p-4 sm:p-5 border border-brand-pink-400/25 mb-4 shadow-glass"
-        >
-          <HandwrittenText size="lg" variant="gold" className="italic">
-            &ldquo;{birthdayConfig.reveal.highlightText}&rdquo;
-          </HandwrittenText>
-          <p className="text-[11px] text-brand-pink-300/80 mt-2 font-medium">
-            � Wishing you all the wonder in the world ?
-          </p>
-        </motion.div>
-
-        {/* 4. Delicate Divider */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: getDelay(0.65) }}
-          className="w-full max-w-xs mb-5"
-        >
-          <OrnamentDivider symbol="sparkle" />
-        </motion.div>
-
-        {/* 5. Navigation Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: getDelay(0.75), ease: [0.22, 1, 0.36, 1] }}
-          className="w-full flex items-center justify-between gap-3"
-        >
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={prevScene}
-            aria-label="Return to intro scene"
-            className="flex-1 flex items-center justify-center gap-1.5"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            <span>Previous</span>
-          </Button>
-
-          <Button
-            variant="romantic"
-            size="md"
-            onClick={handleContinue}
-            aria-label="Proceed to birthday cake scene"
-            className="flex-1 flex items-center justify-center gap-2 font-bold shadow-glow-pink"
-          >
-            <Cake className="w-4 h-4 text-brand-gold-300" />
-            <span>Make a Wish</span>
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </motion.div>
-      </Card>
-    </Container>
+          <ChevronLeft className="w-3.5 h-3.5" />
+          <span>Back</span>
+        </button>
+      </motion.div>
+    </div>
   );
 }

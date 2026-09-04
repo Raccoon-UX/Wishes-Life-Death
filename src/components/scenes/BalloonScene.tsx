@@ -5,13 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useExperience } from '@/hooks/useExperience';
 import { useBirthdayConfig } from '@/context/ConfigContext';
 import { BalloonItem } from '@/types/config.types';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/common/Button';
-import { Container } from '@/components/common/Container';
 import { FloatingBalloon } from '@/components/birthday/FloatingBalloon';
-import { HandwrittenText } from '@/components/typography/HandwrittenText';
-import { Sparkle } from '@/components/decorative/Sparkle';
-import { ChevronLeft, ArrowRight, PartyPopper, MessageSquareHeart } from 'lucide-react';
+import { Sparkles, ArrowRight, ChevronLeft, Heart } from 'lucide-react';
 
 export function BalloonScene() {
   const { nextScene, prevScene, completeScene, setInteractionFlag } = useExperience();
@@ -42,102 +37,95 @@ export function BalloonScene() {
   };
 
   return (
-    <Container className="flex flex-col items-center justify-center my-auto py-4">
-      <Card
-        variant={isAllPopped ? 'goldGlow' : 'romantic'}
-        glow={isAllPopped ? 'gold' : 'soft'}
-        padded={false}
-        className="w-full max-w-sm sm:max-w-md p-5 sm:p-7 flex flex-col items-center text-center relative overflow-hidden transition-all duration-500"
+    <div className="w-full max-w-lg mx-auto px-4 sm:px-6 py-6 flex flex-col items-center justify-center text-center select-none relative z-10">
+      
+      {/* 1. Header Atmosphere */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="space-y-2 mb-2"
       >
-        {/* Ambient background decoration */}
-        <div aria-hidden="true" className="absolute top-4 left-4 opacity-40 pointer-events-none">
-          <Sparkle size="md" color="gold" />
-        </div>
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-violet-400/15 text-brand-violet-200 border border-brand-violet-400/30">
+          <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
+          <span>Secret Balloon Messages</span>
+        </span>
 
-        {/* Scene Title */}
-        <div className="space-y-1.5 mb-3">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase bg-brand-violet-400/20 text-brand-violet-200 border border-brand-violet-400/30">
-            <PartyPopper className="w-3.5 h-3.5 text-brand-gold-300" />
-            <span>Interactive Balloons</span>
-          </span>
+        <h2 className="text-3xl sm:text-4xl font-display font-bold text-gradient-romantic">
+          {birthdayConfig.balloons.title || 'Floating Secrets 🎈'}
+        </h2>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-display text-gradient-romantic">
-            {birthdayConfig.balloons.title}
-          </h2>
+        <p className="text-xs sm:text-sm text-brand-cream-200/80 max-w-xs sm:max-w-sm mx-auto leading-relaxed">
+          {isAllPopped
+            ? 'All secret messages have been unlocked! ✨'
+            : birthdayConfig.balloons.instruction || 'Tap each floating balloon to reveal a secret note.'}
+        </p>
+      </motion.div>
 
-          <p className="text-xs sm:text-sm text-brand-cream-200/80 max-w-xs mx-auto">
-            {isAllPopped
-              ? '?? All surprise wishes have been revealed!'
-              : birthdayConfig.balloons.instruction}
-          </p>
-        </div>
+      {/* 2. BALLOONS FLOATING CLUSTER */}
+      <div className="w-full flex items-center justify-center gap-4 sm:gap-8 my-4 py-3 min-h-[160px]">
+        {balloons.map((balloon, index) => (
+          <FloatingBalloon
+            key={balloon.id}
+            item={balloon}
+            index={index}
+            isPopped={poppedIds.includes(balloon.id)}
+            onPop={handlePop}
+          />
+        ))}
+      </div>
 
-        {/* BALLOONS INTERACTION CLUSTER */}
-        <div className="w-full flex items-center justify-center gap-3 sm:gap-6 my-2 py-2">
-          {balloons.map((balloon, index) => (
-            <FloatingBalloon
-              key={balloon.id}
-              item={balloon}
-              index={index}
-              isPopped={poppedIds.includes(balloon.id)}
-              onPop={handlePop}
-            />
-          ))}
-        </div>
-
-        {/* REVEALED MESSAGE TRAY */}
-        <div className="w-full min-h-[100px] flex items-center justify-center my-3">
-          <AnimatePresence mode="wait">
-            {activeMessage ? (
-              <motion.div
-                key={activeMessage.id}
-                initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="w-full bg-brand-purple-950/85 rounded-2xl p-4 border border-brand-pink-400/40 shadow-glow-pink-soft text-center space-y-1"
-              >
-                <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-brand-pink-300">
-                  <span className="text-lg">{activeMessage.emoji}</span>
-                  <span>Surprise Note</span>
-                </div>
-                <HandwrittenText size="md" variant="pink">
-                  &ldquo;{activeMessage.secretMessage}&rdquo;
-                </HandwrittenText>
-              </motion.div>
-            ) : (
-              <div className="text-xs text-brand-cream-300/60 italic py-4">
-                Tap any floating balloon above to pop it and reveal its secret note ?
+      {/* 3. REVEALED SECRET NOTE DISPLAY */}
+      <div className="w-full max-w-md mx-auto min-h-[110px] flex items-center justify-center mb-6">
+        <AnimatePresence mode="wait">
+          {activeMessage ? (
+            <motion.div
+              key={activeMessage.id}
+              initial={{ opacity: 0, scale: 0.92, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.45 }}
+              className="w-full p-4 rounded-2xl bg-brand-purple-950/70 backdrop-blur-md border border-brand-pink-400/40 shadow-glow-pink-soft text-center space-y-1.5"
+            >
+              <div className="flex items-center justify-center gap-2 text-xs font-bold text-brand-pink-300">
+                <Heart className="w-3.5 h-3.5 fill-current" />
+                <span>Secret Unlocked</span>
+                <span className="text-base">{activeMessage.emoji}</span>
               </div>
-            )}
-          </AnimatePresence>
-        </div>
+              <p className="font-handwriting text-2xl sm:text-3xl text-brand-cream-100 leading-snug">
+                &ldquo;{activeMessage.secretMessage}&rdquo;
+              </p>
+            </motion.div>
+          ) : (
+            <div className="text-xs text-brand-cream-300/50 italic py-4">
+              Tap any balloon above to pop it and reveal its hidden secret ✨
+            </div>
+          )}
+        </AnimatePresence>
+      </div>
 
-        {/* Navigation Action Buttons */}
-        <div className="w-full flex items-center justify-between gap-3 pt-1">
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={prevScene}
-            aria-label="Return to birthday cake scene"
-            className="flex-1 flex items-center justify-center gap-1.5"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            <span>Previous</span>
-          </Button>
+      {/* 4. Navigation Actions */}
+      <div className="w-full max-w-xs flex flex-col items-center gap-3">
+        <button
+          type="button"
+          onClick={handleContinue}
+          aria-label="Proceed to surprise messages scene"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+        >
+          <span>Special Notes 💌</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
+        </button>
 
-          <Button
-            variant={isAllPopped ? 'gold' : 'romantic'}
-            size="md"
-            onClick={handleContinue}
-            aria-label="Proceed to surprise messages scene"
-            className="flex-1 flex items-center justify-center gap-2 font-bold shadow-glow-pink"
-          >
-            <MessageSquareHeart className="w-4 h-4 text-brand-pink-300" />
-            <span>Special Notes</span>
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </div>
-      </Card>
-    </Container>
+        <button
+          type="button"
+          onClick={prevScene}
+          aria-label="Return to cake scene"
+          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
+        >
+          <ChevronLeft className="w-3.5 h-3.5" />
+          <span>Back</span>
+        </button>
+      </div>
+    </div>
   );
 }

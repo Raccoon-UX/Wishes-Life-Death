@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { BalloonItem } from '@/types/config.types';
+import { Sparkles } from 'lucide-react';
 
 export interface FloatingBalloonProps {
   item: BalloonItem;
@@ -34,9 +35,11 @@ export function FloatingBalloon({
 
   if (isPopped) {
     return (
-      <div className="w-20 h-24 sm:w-24 sm:h-28 flex flex-col items-center justify-center opacity-30 select-none">
-        <span className="text-2xl">?</span>
-        <span className="text-[10px] text-brand-cream-300 font-semibold mt-1">Popped!</span>
+      <div className="w-20 h-28 sm:w-24 sm:h-32 flex flex-col items-center justify-center opacity-40 select-none">
+        <div className="w-10 h-10 rounded-full bg-brand-gold-400/20 border border-brand-gold-400/30 flex items-center justify-center text-brand-gold-300">
+          <Sparkles className="w-5 h-5" />
+        </div>
+        <span className="text-[10px] text-brand-cream-300 font-medium mt-1">Popped ✨</span>
       </div>
     );
   }
@@ -45,47 +48,52 @@ export function FloatingBalloon({
     <motion.button
       type="button"
       onClick={() => onPop(item)}
-      aria-label={`Floating balloon ${index + 1} with ${item.emoji}, tap to pop and reveal surprise wish`}
-      whileHover={prefersReducedMotion ? {} : { scale: 1.08 }}
+      aria-label={`Floating balloon with ${item.emoji}, tap to pop and reveal secret birthday wish`}
+      whileHover={prefersReducedMotion ? {} : { scale: 1.1, y: -4 }}
       whileTap={prefersReducedMotion ? {} : { scale: 0.9 }}
       animate={
         prefersReducedMotion
           ? {}
           : {
-              y: [0, -10, 0],
-              rotate: [-2, 2, -2],
+              y: [0, -12, 0],
+              x: [-2, 2, -2],
+              rotate: [-3, 3, -3],
             }
       }
       transition={{
         repeat: Infinity,
-        duration: 3 + (index % 3) * 0.8,
+        duration: 3.2 + (index % 3) * 0.7,
         ease: 'easeInOut',
       }}
-      className="relative group flex flex-col items-center min-w-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-400 rounded-full p-2 cursor-pointer select-none"
+      className="relative group flex flex-col items-center min-w-[64px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-400 rounded-full p-2 cursor-pointer select-none"
     >
-      {/* BALLOON OVAL BODY */}
+      {/* 2.5D BALLOON OVAL SPHERE */}
       <div
-        className={`w-16 h-20 sm:w-20 sm:h-24 rounded-[50%] bg-gradient-to-tr ${colorGradients} ${glowShadow} relative flex items-center justify-center border border-white/20 transform-gpu`}
+        className={`w-18 h-24 sm:w-22 sm:h-28 rounded-[50%_50%_50%_50%/40%_40%_60%_60%] bg-gradient-to-tr ${colorGradients} ${glowShadow} relative flex items-center justify-center border border-white/30 transform-gpu transition-shadow duration-300`}
       >
-        {/* Specular Highlight */}
-        <div className="absolute top-2 left-2.5 w-4 h-6 rounded-full bg-white/45 blur-[1px] rotate-[-25deg]" />
+        {/* Curved Specular 3D Highlight */}
+        <div className="absolute top-2.5 left-3 w-5 h-8 rounded-full bg-white/50 blur-[1px] rotate-[-30deg]" />
+        
+        {/* Soft Secondary Rim Light */}
+        <div className="absolute bottom-3 right-3 w-4 h-6 rounded-full bg-white/20 blur-[2px]" />
 
-        {/* Emoji Badge */}
-        <span className="text-xl sm:text-2xl drop-shadow-md select-none group-hover:scale-110 transition-transform">
+        {/* Emoji Symbol */}
+        <span className="text-2xl sm:text-3xl drop-shadow-md select-none group-hover:scale-125 transition-transform duration-200">
           {item.emoji}
         </span>
 
-        {/* Balloon Knot */}
-        <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2 bg-inherit rounded-b-sm" />
+        {/* Balloon Tied Knot */}
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-2.5 bg-brand-purple-900/60 border border-white/20 rounded-b-sm" />
       </div>
 
-      {/* Balloon Hanging String SVG */}
-      <svg width="20" height="28" viewBox="0 0 20 28" className="opacity-60 overflow-visible">
+      {/* Dangling String SVG */}
+      <svg width="24" height="36" viewBox="0 0 24 36" className="opacity-65 overflow-visible">
         <path
-          d="M10 0 Q6 10, 14 18 T10 28"
+          d="M12 0 Q6 12, 18 22 T12 36"
           fill="none"
           stroke="#FFFDF9"
-          strokeWidth="1.2"
+          strokeWidth="1.5"
+          strokeDasharray="4 2"
         />
       </svg>
     </motion.button>

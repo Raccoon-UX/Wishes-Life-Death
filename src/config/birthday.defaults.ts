@@ -14,48 +14,48 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
   },
   theme: 'romantic',
   intro: {
-    greeting: 'Hey Sarah ?',
-    subheading: 'Someone created a digital universe just for your special day...',
-    badgeText: 'A Special Birthday Surprise',
-    ctaText: 'Open Your Gift',
+    greeting: 'Hey Sarah 🌸',
+    subheading: 'I made a little digital universe created just for your special day...',
+    badgeText: 'A Special Birthday Surprise ✨',
+    ctaText: 'Open Your Gift →',
   },
   reveal: {
-    headline: 'Happy Birthday, Sarah! ??',
-    subheadline: 'Today is all about celebrating the wonderful human you are.',
-    highlightText: 'May this year bring you endless joy, love, and magic.',
+    headline: 'Happy Birthday, Sarah! 🎂✨',
+    subheadline: 'Today is all about celebrating the wonderful, radiant human you are.',
+    highlightText: 'May this year bring you endless joy, love, laughter, and magic.',
   },
   cake: {
     candleCount: 3,
-    flavor: 'Strawberry Vanilla Cream',
+    flavor: 'Strawberry Vanilla Cream Cake 🍰',
     wishPrompt: 'Close your eyes and make a heartfelt wish...',
-    blowPrompt: 'Blow on your microphone or tap the candles to blow them out!',
+    blowPrompt: 'Tap each candle to blow it out and make your wish come true!',
   },
   balloons: {
-    title: 'Pop the Balloons ??',
-    instruction: 'Tap each floating balloon to reveal a secret birthday message.',
+    title: 'Secret Floating Balloons 🎈',
+    instruction: 'Tap each balloon to pop it and reveal a hidden birthday secret.',
     items: [
       {
         id: 'b-1',
         color: 'pink',
-        emoji: '??',
-        secretMessage: 'You bring unmatched warmth and smiles wherever you go!',
+        emoji: '💖',
+        secretMessage: 'You bring unmatched warmth, energy, and smiles wherever you go!',
       },
       {
         id: 'b-2',
         color: 'gold',
-        emoji: '?',
+        emoji: '⭐',
         secretMessage: 'May every dream you chase this year turn into reality.',
       },
       {
         id: 'b-3',
         color: 'violet',
-        emoji: '?',
-        secretMessage: 'Thank you for being the most genuine friend anyone could ask for.',
+        emoji: '✨',
+        secretMessage: 'Thank you for being the most genuine, caring friend anyone could ever ask for.',
       },
     ],
   },
   messages: {
-    title: 'Special Birthday Notes ??',
+    title: 'Special Birthday Notes 💌',
     messages: [
       {
         id: 'm-1',
@@ -73,16 +73,16 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
     questions: [
       {
         id: 'q-1',
-        question: 'Ready for the most amazing year of your life?',
+        question: 'Ready for the most amazing, unforgettable year of your life?',
         options: [
-          { label: 'Yes, absolutely! ??', reaction: 'That is the spirit! Here is to new heights!' },
-          { label: 'Born ready! ?', reaction: 'Unstoppable energy! Let us make it memorable.' },
+          { label: 'Yes, absolutely! ✨', reaction: 'That is the spirit! Here is to reaching new heights together!' },
+          { label: 'Born ready! 🚀', reaction: 'Unstoppable energy! Let us make every second memorable.' },
         ],
       },
     ],
   },
   memories: {
-    title: 'Our Journey Down Memory Lane ??',
+    title: 'Our Journey Down Memory Lane 📸',
     subtitle: 'A few unforgettable milestones we have shared together...',
     timeline: [
       {
@@ -96,7 +96,7 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
         id: 'mem-2',
         yearOrTag: 'Chapter 2',
         title: 'Late Night Laughs & Road Trips',
-        description: 'Blasting our favorite playlist under the open stars.',
+        description: 'Blasting our favorite playlist under the open night sky.',
         imagePlaceholder: '/assets/images/memory-2.jpg',
       },
       {
@@ -123,22 +123,22 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
     },
   ],
   letter: {
-    title: 'A Letter Just For You ??',
+    title: 'A Letter Just For You 💌',
     salutation: 'Dearest Sarah,',
     paragraphs: [
-      'As you turn another page in your book of life, I wanted to take a quiet moment to tell you how deeply appreciated you are.',
-      'Through every high and low, your strength, compassion, and humor have inspired everyone lucky enough to know you.',
+      'As you turn another page in your book of life, I wanted to take a quiet moment to tell you how deeply appreciated and cherished you are.',
+      'Through every high and low, your strength, compassion, and humor have inspired everyone lucky enough to be in your orbit.',
       'Never stop dreaming big and radiating the light that makes you so uniquely wonderful.',
     ],
-    highlightQuote: '�You don�t just exist in the world; you make the world brighter for everyone in it.�',
+    highlightQuote: '“You do not just exist in the world; you make the world brighter for everyone in it.”',
     closing: 'Always cheering for you,',
-    signature: 'Alex ??',
+    signature: 'Alex ✨',
   },
   celebration: {
-    title: 'Happy Birthday, Sunshine! ??',
-    subtitle: 'Let the celebrations begin! May your day be filled with endless love and laughter.',
+    title: 'Happy Birthday, Sunshine! 🎉',
+    subtitle: 'Let the celebrations begin! May your day be filled with endless love, laughter, and magic.',
     confettiColors: ['#F472B6', '#FBBF24', '#8B5CF6', '#FFFFFF', '#F9A8D4'],
-    replayButtonText: 'Experience Again ??',
+    replayButtonText: 'Experience Again 🔄',
   },
   audio: {
     bgMusicUrl: '/assets/audio/ambient-celebration.mp3',

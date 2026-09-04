@@ -104,7 +104,7 @@ export default function StyleLabPage() {
             <div>
               <span className="text-[11px] uppercase tracking-wider text-brand-pink-300 font-semibold">Display / Hero (Cinzel / Serif)</span>
               <h1 className="text-3xl sm:text-4xl font-bold font-display text-gradient-romantic">
-                Happy Birthday, Sarah! ??
+                Happy Birthday, Sarah! ✨🎂
               </h1>
             </div>
 
@@ -132,7 +132,7 @@ export default function StyleLabPage() {
             <div>
               <span className="text-[11px] uppercase tracking-wider text-brand-pink-300 font-semibold">Handwritten / Intimate Accent (Caveat)</span>
               <HandwrittenText size="lg" variant="pink">
-                �You make the world brighter simply by being in it.� ?
+                “You make the world brighter simply by being in it.” ✨
               </HandwrittenText>
             </div>
           </Card>
@@ -225,7 +225,7 @@ export default function StyleLabPage() {
             5. Accessible Button System
           </SectionHeading>
           <p className="text-xs sm:text-sm text-brand-cream-200/70">
-            All buttons enforce =44px touch targets, visible keyboard focus rings, active press scales, and reduced motion safety.
+            All buttons enforce ≥44px touch targets, visible keyboard focus rings, active press scales, and reduced motion safety.
           </p>
 
           <div className="flex flex-wrap gap-3 items-center">

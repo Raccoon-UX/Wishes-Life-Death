@@ -4,72 +4,73 @@ export const fadeInVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.35, ease: 'easeOut' },
+    transition: { duration: 0.5, ease: 'easeOut' },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.25, ease: 'easeIn' },
+    transition: { duration: 0.3, ease: 'easeIn' },
   },
 };
 
 export const slideUpVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
   exit: {
     opacity: 0,
-    y: -15,
-    transition: { duration: 0.25, ease: 'easeIn' },
+    y: -16,
+    transition: { duration: 0.3, ease: 'easeIn' },
   },
 };
 
 export const scaleInVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { opacity: 0, scale: 0.92 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
   exit: {
     opacity: 0,
-    scale: 0.95,
-    transition: { duration: 0.2, ease: 'easeIn' },
+    scale: 0.94,
+    transition: { duration: 0.3, ease: 'easeIn' },
   },
 };
 
 export const sceneTransitionVariants: Variants = {
   enter: (direction: 'forward' | 'backward') => ({
-    x: direction === 'forward' ? 30 : -30,
+    y: direction === 'forward' ? 24 : -24,
     opacity: 0,
-    scale: 0.98,
+    scale: 0.97,
+    filter: 'blur(4px)',
   }),
   center: {
-    x: 0,
+    y: 0,
     opacity: 1,
     scale: 1,
+    filter: 'blur(0px)',
     transition: {
-      x: { type: 'spring' as const, stiffness: 300, damping: 30 },
-      opacity: { duration: 0.25 },
-      scale: { duration: 0.25 },
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
   exit: (direction: 'forward' | 'backward') => ({
-    x: direction === 'forward' ? -30 : 30,
+    y: direction === 'forward' ? -20 : 20,
     opacity: 0,
-    scale: 0.98,
+    scale: 0.97,
+    filter: 'blur(4px)',
     transition: {
-      x: { type: 'spring' as const, stiffness: 300, damping: 30 },
-      opacity: { duration: 0.2 },
-      scale: { duration: 0.2 },
+      duration: 0.35,
+      ease: [0.22, 1, 0.36, 1],
     },
   }),
 };
 
 export const reducedMotionSceneVariants: Variants = {
   enter: { opacity: 0 },
-  center: { opacity: 1, transition: { duration: 0.15 } },
-  exit: { opacity: 0, transition: { duration: 0.15 } },
+  center: { opacity: 1, transition: { duration: 0.2 } },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
 };

@@ -4,14 +4,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useExperience } from '@/hooks/useExperience';
 import { useBirthdayConfig } from '@/context/ConfigContext';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/common/Button';
-import { Container } from '@/components/common/Container';
 import { InteractiveEnvelope } from '@/components/letter/InteractiveEnvelope';
-import { HandwrittenText } from '@/components/typography/HandwrittenText';
-import { Sparkle } from '@/components/decorative/Sparkle';
-import { OrnamentDivider } from '@/components/decorative/OrnamentDivider';
-import { ChevronLeft, ArrowRight, Mail, Sparkles } from 'lucide-react';
+import { Sparkles, ArrowRight, ChevronLeft, Mail } from 'lucide-react';
 
 export function LetterScene() {
   const { nextScene, prevScene, completeScene, setInteractionFlag } = useExperience();
@@ -31,125 +25,115 @@ export function LetterScene() {
   };
 
   return (
-    <Container className="flex flex-col items-center justify-center my-auto py-3">
-      <Card
-        variant="romantic"
-        glow="soft"
-        padded={false}
-        className="w-full max-w-sm sm:max-w-md p-5 sm:p-7 flex flex-col items-center text-center relative overflow-hidden"
+    <div className="w-full max-w-lg mx-auto px-4 sm:px-6 py-6 flex flex-col items-center justify-center text-center select-none relative z-10">
+      
+      {/* 1. Header Atmosphere */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="space-y-1.5 mb-2"
       >
-        {/* Ambient background decoration */}
-        <div aria-hidden="true" className="absolute top-4 right-4 opacity-40 pointer-events-none">
-          <Sparkle size="md" color="gold" />
-        </div>
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-pink-400/15 text-brand-pink-300 border border-brand-pink-400/30">
+          <Mail className="w-3.5 h-3.5 text-brand-gold-300" />
+          <span>From The Heart</span>
+        </span>
 
-        {/* Scene Header */}
-        <div className="space-y-1 mb-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase bg-brand-pink-400/20 text-brand-pink-200 border border-brand-pink-400/30">
-            <Mail className="w-3.5 h-3.5 text-brand-gold-300" />
-            <span>From The Heart</span>
-          </span>
+        <h2 className="text-3xl sm:text-4xl font-display font-bold text-gradient-romantic">
+          {letter.title || 'A Letter Just For You 💌'}
+        </h2>
+      </motion.div>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-display text-gradient-romantic">
-            {letter.title}
-          </h2>
-        </div>
-
-        {/* INTERACTIVE ENVELOPE OR EXPANDED LETTER SHEET */}
-        <div className="w-full my-2">
-          <AnimatePresence mode="wait">
-            {!isOpened ? (
-              <motion.div
-                key="envelope-view"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                className="w-full flex flex-col items-center py-2"
-              >
-                <InteractiveEnvelope
-                  isOpened={isOpened}
-                  onOpen={handleOpenLetter}
-                  recipientName={birthdayConfig.recipient.name}
-                  senderName={birthdayConfig.sender.name}
-                />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="letter-expanded-view"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full bg-gradient-to-b from-[#FFFDF9] via-[#FFFBEB] to-[#FEF3C7] text-neutral-900 rounded-2xl p-5 sm:p-6 border border-brand-gold-300 shadow-dramatic text-left space-y-3.5 max-h-[350px] sm:max-h-[390px] overflow-y-auto pr-2 relative select-text"
-              >
-                {/* Letter Header Ribbon */}
-                <div className="flex items-center justify-between border-b border-brand-gold-400/30 pb-2 select-none">
-                  <span className="text-[11px] font-bold font-display text-brand-purple-900 tracking-wide">
-                    {letter.salutation}
-                  </span>
-                  <div className="flex items-center gap-1 text-[10px] text-brand-pink-600 font-semibold">
-                    <Sparkles className="w-3 h-3" />
-                    <span>Special Letter</span>
-                  </div>
+      {/* 2. INTERACTIVE ENVELOPE OR EXPANDED STATIONERY LETTER */}
+      <div className="w-full my-3 min-h-[360px] flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          {!isOpened ? (
+            <motion.div
+              key="envelope-view"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.45 }}
+              className="w-full flex flex-col items-center py-2"
+            >
+              <InteractiveEnvelope
+                isOpened={isOpened}
+                onOpen={handleOpenLetter}
+                recipientName={birthdayConfig.recipient.name}
+                senderName={birthdayConfig.sender.name}
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="letter-expanded-view"
+              initial={{ opacity: 0, y: 24, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-md bg-gradient-to-b from-[#FFFDF9] via-[#FFFBEB] to-[#FEF3C7] text-neutral-900 rounded-2xl p-5 sm:p-6 border border-brand-gold-300/80 shadow-dramatic text-left space-y-4 max-h-[380px] sm:max-h-[420px] overflow-y-auto pr-2 relative select-text"
+            >
+              {/* Letter Header Ribbon */}
+              <div className="flex items-center justify-between border-b border-brand-gold-400/30 pb-2 select-none">
+                <span className="text-sm font-bold font-display text-brand-purple-950 tracking-wide">
+                  {letter.salutation}
+                </span>
+                <div className="flex items-center gap-1.5 text-xs text-brand-pink-600 font-semibold font-handwriting">
+                  <Sparkles className="w-3.5 h-3.5 text-brand-gold-500" />
+                  <span>With Love</span>
                 </div>
+              </div>
 
-                {/* Letter Paragraphs */}
-                <div className="space-y-2.5 text-xs sm:text-sm text-neutral-800/90 leading-relaxed font-sans">
-                  {letter.paragraphs.map((p, idx) => (
-                    <p key={idx}>{p}</p>
-                  ))}
-                </div>
+              {/* Letter Body Paragraphs */}
+              <div className="space-y-3 text-xs sm:text-sm text-neutral-800/90 leading-relaxed font-sans">
+                {letter.paragraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
 
-                {/* Highlight Quote Box */}
-                {letter.highlightQuote && (
-                  <div className="bg-brand-gold-100/70 rounded-xl p-3.5 border-l-4 border-brand-gold-500 shadow-sm">
-                    <HandwrittenText size="sm" variant="gold" className="text-neutral-900 font-medium italic">
-                      {letter.highlightQuote}
-                    </HandwrittenText>
-                  </div>
-                )}
-
-                {/* Letter Closing & Signature */}
-                <div className="pt-2 border-t border-brand-gold-400/20 text-right space-y-0.5">
-                  <p className="text-xs text-neutral-700 font-sans italic">
-                    {letter.closing}
+              {/* Highlight Handwritten Quote Block */}
+              {letter.highlightQuote && (
+                <div className="bg-amber-100/70 rounded-xl p-3.5 border-l-4 border-amber-500 shadow-sm">
+                  <p className="font-handwriting text-xl sm:text-2xl text-neutral-900 leading-snug">
+                    {letter.highlightQuote}
                   </p>
-                  <HandwrittenText size="lg" variant="pink" className="text-brand-pink-600 font-bold">
-                    {letter.signature}
-                  </HandwrittenText>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+              )}
 
-        <OrnamentDivider symbol="heart" />
+              {/* Letter Closing & Signature Stamp */}
+              <div className="pt-2 border-t border-brand-gold-400/20 text-right space-y-0.5">
+                <p className="text-xs text-neutral-600 font-sans italic">
+                  {letter.closing}
+                </p>
+                <p className="font-handwriting text-2xl sm:text-3xl text-brand-pink-600 font-bold">
+                  {letter.signature}
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-        {/* Navigation Action Buttons */}
-        <div className="w-full flex items-center justify-between gap-3 pt-1">
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={prevScene}
-            aria-label="Return to memory lane scene"
-            className="flex-1 flex items-center justify-center gap-1.5"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            <span>Previous</span>
-          </Button>
+      {/* 3. Navigation Actions */}
+      <div className="w-full max-w-xs flex flex-col items-center gap-2.5 pt-2">
+        <button
+          type="button"
+          onClick={handleContinue}
+          aria-label="Proceed to celebration scene"
+          className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-brand-pink-500 to-brand-gold-400 text-brand-purple-950 font-bold text-base shadow-glow-pink hover:shadow-glow-gold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2.5 group"
+        >
+          <span>Celebrate Together 🎉</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-200" />
+        </button>
 
-          <Button
-            variant={isOpened ? 'gold' : 'romantic'}
-            size="md"
-            onClick={handleContinue}
-            aria-label="Proceed to celebration scene"
-            className="flex-1 flex items-center justify-center gap-2 font-bold shadow-glow-pink"
-          >
-            <span>Celebrate!</span>
-            <ArrowRight className="w-4 h-4" />
-          </Button>
-        </div>
-      </Card>
-    </Container>
+        <button
+          type="button"
+          onClick={prevScene}
+          aria-label="Return to memory lane scene"
+          className="text-xs text-brand-cream-300/50 hover:text-brand-cream-200 transition-colors flex items-center gap-1 py-1"
+        >
+          <ChevronLeft className="w-3.5 h-3.5" />
+          <span>Back</span>
+        </button>
+      </div>
+    </div>
   );
 }

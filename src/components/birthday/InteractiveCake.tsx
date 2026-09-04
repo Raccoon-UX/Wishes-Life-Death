@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { Sparkles } from 'lucide-react';
 
 export interface InteractiveCakeProps {
   candleCount: number;
@@ -20,7 +21,17 @@ export function InteractiveCake({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="relative w-full max-w-[280px] sm:max-w-[320px] mx-auto flex flex-col items-center select-none py-2">
+    <div className="relative w-full max-w-[280px] sm:max-w-[340px] mx-auto flex flex-col items-center select-none py-2">
+      
+      {/* Dynamic Candle Light Glow in Background */}
+      <div
+        className={`absolute top-10 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-2xl -z-10 transition-all duration-700 pointer-events-none ${
+          candlesLit.some(Boolean)
+            ? 'bg-brand-gold-500/25 scale-110'
+            : 'bg-brand-pink-500/10 scale-90'
+        }`}
+      />
+
       {/* CANDLES ROW */}
       <div className="relative z-20 flex items-end justify-center gap-4 sm:gap-6 -mb-3 px-2">
         {Array.from({ length: candleCount }).map((_, index) => {
@@ -32,7 +43,7 @@ export function InteractiveCake({
               type="button"
               onClick={() => onToggleCandle(index)}
               aria-label={`Candle ${index + 1}, ${isLit ? 'lit - tap to blow out' : 'extinguished'}`}
-              className="group relative flex flex-col items-center justify-end min-w-[44px] min-h-[64px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-purple-950 rounded-lg p-1 transition-transform active:scale-95 cursor-pointer"
+              className="group relative flex flex-col items-center justify-end min-w-[44px] min-h-[64px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold-400 rounded-lg p-1 transition-transform active:scale-95 cursor-pointer"
             >
               {/* FLAME / SMOKE CONTAINER */}
               <div className="relative w-6 h-8 flex items-center justify-center mb-0.5">
@@ -45,26 +56,26 @@ export function InteractiveCake({
                         prefersReducedMotion
                           ? { scale: 1, opacity: 1 }
                           : {
-                              scale: [1, 1.15, 0.95, 1.1, 1],
-                              opacity: [0.95, 1, 0.9, 1, 0.95],
+                              scale: [1, 1.18, 0.96, 1.12, 1],
+                              opacity: [0.95, 1, 0.92, 1, 0.95],
                               rotate: [-2, 2, -1, 3, 0],
                             }
                       }
-                      exit={{ scale: 0, opacity: 0, y: -8 }}
+                      exit={{ scale: 0, opacity: 0, y: -10 }}
                       transition={{
                         repeat: Infinity,
-                        duration: 1.8 + (index % 3) * 0.4,
+                        duration: 1.6 + (index % 3) * 0.3,
                         ease: 'easeInOut',
                       }}
                       className="relative flex items-center justify-center"
                     >
-                      {/* Outer Flame Glow */}
-                      <div className="absolute w-7 h-7 rounded-full bg-brand-gold-400/40 blur-[6px]" />
+                      {/* Outer Flame Radiant Glow */}
+                      <div className="absolute w-8 h-8 rounded-full bg-brand-gold-400/40 blur-[7px]" />
 
                       {/* Flame Teardrop SVG */}
                       <svg
                         viewBox="0 0 20 28"
-                        className="w-5 h-7 drop-shadow-[0_0_10px_rgba(245,158,11,0.85)]"
+                        className="w-5 h-7 drop-shadow-[0_0_12px_rgba(245,158,11,0.95)]"
                       >
                         <defs>
                           <radialGradient id={`flameGrad-${index}`} cx="50%" cy="60%" r="50%">
@@ -83,12 +94,15 @@ export function InteractiveCake({
                   ) : (
                     <motion.div
                       key="smoke"
-                      initial={{ opacity: 0.8, y: 0, scale: 0.6 }}
-                      animate={{ opacity: 0, y: -20, scale: 1.4 }}
-                      transition={{ duration: 0.8, ease: 'easeOut' }}
-                      className="text-[11px] text-brand-cream-300 font-bold select-none pointer-events-none"
+                      initial={{ opacity: 0.8, y: 0, scale: 0.4 }}
+                      animate={{ opacity: 0, y: -24, scale: 1.5, x: [-2, 4, -2] }}
+                      transition={{ duration: 1, ease: 'easeOut' }}
+                      className="pointer-events-none flex flex-col items-center"
                     >
-                      ??
+                      {/* Animated Smoke Puff SVG */}
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-brand-cream-300/60 fill-current">
+                        <path d="M12 2a4 4 0 0 0-4 4c0 .3.04.58.11.86A5 5 0 0 0 4 12a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5c0-2.4-1.7-4.4-4-4.9.04-.36.1-.7.1-1.1a4 4 0 0 0-8-4z" />
+                      </svg>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -120,7 +134,7 @@ export function InteractiveCake({
       </div>
 
       {/* CAKE CONTAINER SVG */}
-      <div className="relative w-full z-10 filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.5)]">
+      <div className="relative w-full z-10 filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]">
         <svg
           viewBox="0 0 300 190"
           className="w-full h-auto overflow-visible"
@@ -164,7 +178,7 @@ export function InteractiveCake({
           <ellipse cx="150" cy="110" rx="105" ry="15" fill="#5E2894" />
 
           {/* Bottom Tier Gold Pearl Beads */}
-          <g fill="#FBBF24" opacity="0.9">
+          <g fill="#FBBF24" opacity="0.95">
             {Array.from({ length: 11 }).map((_, i) => (
               <circle key={i} cx={60 + i * 18} cy={155 + Math.sin(i * 0.6) * 3} r="3.5" />
             ))}
@@ -195,8 +209,9 @@ export function InteractiveCake({
       </div>
 
       {/* Flavor subtitle */}
-      <span className="text-[10px] sm:text-[11px] font-medium tracking-wider uppercase text-brand-pink-300/80 mt-1">
-        ?? {flavor}
+      <span className="text-[11px] font-medium tracking-wider text-brand-pink-300/80 mt-2 flex items-center gap-1.5">
+        <Sparkles className="w-3.5 h-3.5 text-brand-gold-300" />
+        <span>{flavor}</span>
       </span>
     </div>
   );

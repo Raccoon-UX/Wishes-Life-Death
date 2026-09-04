@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/Card';
 import { HandwrittenText } from '@/components/typography/HandwrittenText';
 import { OrnamentDivider } from '@/components/decorative/OrnamentDivider';
 import { Button } from '@/components/common/Button';
-import { Cake, Sparkles, Mail, PartyPopper } from 'lucide-react';
+import { Cake, Sparkles, Mail, PartyPopper, Heart } from 'lucide-react';
 
 export interface LivePreviewProps {
   config: BirthdayConfig;
@@ -48,16 +48,18 @@ export function LivePreview({ config }: LivePreviewProps) {
         {activeTab === 'intro' && (
           <Card variant="romantic" glow="soft" padded={false} className="p-5 text-center space-y-3">
             <span className="inline-block text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-brand-pink-400/20 text-brand-pink-300 border border-brand-pink-400/30">
-              {config.intro.badgeText || 'A Special Birthday Surprise'}
+              {config.intro.badgeText || 'A Special Birthday Surprise ✨'}
             </span>
 
             <h3 className="text-2xl font-bold font-display text-gradient-romantic">
-              {config.intro.greeting || 'Hey Sarah ?'}
+              {config.intro.greeting || 'Hey Sarah 🌸'}
             </h3>
 
             {config.recipient.nickname && (
-              <p className="text-xs text-brand-gold-300 font-semibold uppercase tracking-wide">
-                ? For {config.recipient.nickname} ?
+              <p className="text-xs text-brand-gold-300 font-semibold tracking-wide flex items-center justify-center gap-1">
+                <Heart className="w-3 h-3 fill-current text-brand-pink-400" />
+                <span>For {config.recipient.nickname}</span>
+                <Heart className="w-3 h-3 fill-current text-brand-pink-400" />
               </p>
             )}
 
@@ -66,13 +68,13 @@ export function LivePreview({ config }: LivePreviewProps) {
             </p>
 
             <HandwrittenText size="sm" variant="pink">
-              �A little digital world created just for you...�
+              “A little digital world created just for you...”
             </HandwrittenText>
 
             <OrnamentDivider symbol="sparkle" className="my-2" />
 
             <Button variant="romantic" size="sm" fullWidth className="font-bold">
-              {config.intro.ctaText || 'Open Your Gift'}
+              {config.intro.ctaText || 'Open Your Gift →'}
             </Button>
           </Card>
         )}
@@ -86,7 +88,7 @@ export function LivePreview({ config }: LivePreviewProps) {
             </span>
 
             <h3 className="text-2xl font-bold font-display text-gradient-romantic">
-              {config.reveal.headline || 'Happy Birthday! ??'}
+              {config.reveal.headline || 'Happy Birthday! 🎂✨'}
             </h3>
 
             <p className="text-xs text-brand-cream-100/90 leading-relaxed max-w-xs mx-auto">
@@ -95,12 +97,12 @@ export function LivePreview({ config }: LivePreviewProps) {
 
             <div className="bg-brand-purple-950/70 rounded-xl p-3 border border-brand-pink-400/25">
               <HandwrittenText size="sm" variant="gold" className="italic">
-                &ldquo;{config.reveal.highlightText || 'May this year bring you endless joy.'}&rdquo;
+                &ldquo;{config.reveal.highlightText || 'May this year bring you endless joy and magic.'}&rdquo;
               </HandwrittenText>
             </div>
 
             <Button variant="romantic" size="sm" fullWidth className="font-bold">
-              Make A Wish ??
+              Make A Wish 🎂 →
             </Button>
           </Card>
         )}
@@ -114,24 +116,25 @@ export function LivePreview({ config }: LivePreviewProps) {
             </span>
 
             <h3 className="text-xl font-bold font-display text-gradient-romantic">
-              Make A Wish ??
+              Make A Wish ✨
             </h3>
 
             <div className="flex items-center justify-center gap-3 py-2">
               {Array.from({ length: config.cake.candleCount || 3 }).map((_, i) => (
                 <div key={i} className="flex flex-col items-center">
-                  <span className="text-sm">??</span>
+                  <span className="text-sm">🔥</span>
                   <div className="w-3 h-8 bg-gradient-to-b from-brand-pink-300 to-brand-violet-500 rounded-t-sm" />
                 </div>
               ))}
             </div>
 
-            <p className="text-xs text-brand-cream-200/80 font-sans">
-              ?? {config.cake.flavor}
+            <p className="text-xs text-brand-cream-200/80 font-sans flex items-center justify-center gap-1">
+              <Sparkles className="w-3 h-3 text-brand-gold-300" />
+              <span>{config.cake.flavor}</span>
             </p>
 
             <Button variant="gold" size="sm" fullWidth className="font-bold">
-              Pop Balloons ??
+              Pop Balloons 🎈 →
             </Button>
           </Card>
         )}
@@ -152,12 +155,12 @@ export function LivePreview({ config }: LivePreviewProps) {
                 {config.letter.paragraphs[0] || 'As you turn another page in your book of life...'}
               </p>
               <div className="text-right text-xs font-bold text-brand-pink-600 font-handwriting">
-                {config.letter.signature || 'With love, Alex ??'}
+                {config.letter.signature || 'With love, Alex ✨'}
               </div>
             </div>
 
             <Button variant="romantic" size="sm" fullWidth className="font-bold">
-              Celebrate! ??
+              Celebrate! 🎉 →
             </Button>
           </Card>
         )}
@@ -183,15 +186,15 @@ export function LivePreview({ config }: LivePreviewProps) {
 
             <div className="bg-brand-purple-950/85 rounded-xl p-3 border border-brand-gold-400/30 text-xs">
               <HandwrittenText size="sm" variant="gold" className="italic">
-                �{config.celebration.title || 'Forever Cherished'}�
+                “{config.celebration.title || 'Forever Cherished'}”
               </HandwrittenText>
               <p className="text-[10px] text-brand-cream-200/70 pt-1">
-                � {config.sender.name || 'Alex'} ??
+                — {config.sender.name || 'Alex'} ✨
               </p>
             </div>
 
             <Button variant="gold" size="sm" fullWidth className="font-bold">
-              {config.celebration.replayButtonText || 'Experience Again ??'}
+              {config.celebration.replayButtonText || 'Experience Again 🔄'}
             </Button>
           </Card>
         )}
