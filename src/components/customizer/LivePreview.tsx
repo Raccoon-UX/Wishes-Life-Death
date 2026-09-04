@@ -154,7 +154,7 @@ export function LivePreview({ config }: LivePreviewProps) {
                 {config.letter.paragraphs[0] || 'As you turn another page in your book of life...'}
               </p>
               <div className="text-right text-xs font-bold text-[#E86A92] font-handwriting">
-                {config.letter.signature || 'With love, Alex ✨'}
+                {config.letter.signature || 'With love, Tushar ✨'}
               </div>
             </div>
 
@@ -188,7 +188,7 @@ export function LivePreview({ config }: LivePreviewProps) {
                 “{config.celebration.title || 'Forever Cherished'}”
               </HandwrittenText>
               <p className="text-[10px] text-[#8B2648] pt-1 font-medium">
-                — {config.sender.name || 'Alex'} ✨
+                — {config.sender.name || 'Tushar'} ✨
               </p>
             </div>
 

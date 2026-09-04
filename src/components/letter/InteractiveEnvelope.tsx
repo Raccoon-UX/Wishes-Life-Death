@@ -15,7 +15,7 @@ export interface InteractiveEnvelopeProps {
 export function InteractiveEnvelope({
   isOpened,
   onOpen,
-  senderName = 'Alex',
+  senderName = 'Tushar',
   recipientName = 'Meghna',
 }: InteractiveEnvelopeProps) {
   const prefersReducedMotion = useReducedMotion();

@@ -426,7 +426,7 @@ function CustomizerContent() {
                     type="text"
                     value={config.sender.name}
                     onChange={(e) => handleNestedFieldChange('sender', 'name', e.target.value)}
-                    placeholder="e.g. Alex"
+                    placeholder="e.g. Tushar"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                   />
                 </div>
@@ -831,7 +831,7 @@ function CustomizerContent() {
                       type="text"
                       value={config.letter.signature}
                       onChange={(e) => handleNestedFieldChange('letter', 'signature', e.target.value)}
-                      placeholder="e.g. Alex ✨"
+                      placeholder="e.g. Tushar ✨"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F5] border border-[#F8B4C8] focus:border-[#E86A92] focus:outline-none text-sm text-[#3B0D1E]"
                     />
                   </div>

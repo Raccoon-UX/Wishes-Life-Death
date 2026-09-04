@@ -1,11 +1,24 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useExperience } from '@/hooks/useExperience';
 
 const AUDIO_SRC = '/audio/arj-kiya-hai.mp3';
 const TARGET_VOLUME = 1.0; // Full Volume (100%)
 const STORAGE_KEY = 'birthday_music_muted';
+
+/**
+ * Global helper to trigger playback from any user interaction (buttons, touch, etc.)
+ */
+export function playBackgroundMusic() {
+  if (typeof window === 'undefined') return;
+  const audio = document.getElementById('birthday-background-music') as HTMLAudioElement | null;
+  if (audio) {
+    audio.volume = TARGET_VOLUME;
+    audio.muted = false;
+    audio.play().catch(() => {});
+  }
+}
 
 export function AudioController() {
   const { state, dispatch } = useExperience();
@@ -16,7 +29,8 @@ export function AudioController() {
 
   // 1. Initialize Audio Element and Autoplay / Interaction Fallback
   useEffect(() => {
-    if (audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
     // Check user's saved preference
     let savedMutePreference = false;
@@ -30,12 +44,8 @@ export function AudioController() {
       // localStorage may be unavailable in some browser modes
     }
 
-    // Create persistent Audio instance
-    const audio = new Audio(AUDIO_SRC);
-    audio.loop = true;
-    audio.preload = 'auto';
     audio.volume = TARGET_VOLUME;
-    audioRef.current = audio;
+    audio.muted = savedMutePreference;
 
     const handlePlay = () => {
       dispatch({ type: 'SET_MUSIC_PLAYING', payload: true });
@@ -47,16 +57,14 @@ export function AudioController() {
 
     const handleEnded = () => {
       // Modern browsers loop automatically when audio.loop is true.
-      // Re-trigger playback if interrupted:
-      if (!stateRef.current.isMuted) {
-        audio.currentTime = 0;
-        audio.volume = TARGET_VOLUME;
-        audio.play().catch(() => {});
+      if (!stateRef.current.isMuted && audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.volume = TARGET_VOLUME;
+        audioRef.current.play().catch(() => {});
       }
     };
 
     const handleError = () => {
-      // Gracefully handle missing asset or network error without throwing uncaught exceptions
       dispatch({ type: 'SET_MUSIC_PLAYING', payload: false });
     };
 
@@ -65,27 +73,26 @@ export function AudioController() {
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('error', handleError);
 
-    // Setup first interaction fallback listener
+    // Setup first interaction fallback listener for gestures
     const interactionEvents = [
       'pointerdown',
       'touchstart',
       'touchend',
       'click',
       'keydown',
-      'pointermove',
-      'scroll',
     ] as const;
 
     const removeInteractionListeners = () => {
       interactionEvents.forEach((evt) => {
-        window.removeEventListener(evt, handleFirstInteraction);
-        document.removeEventListener(evt, handleFirstInteraction);
+        window.removeEventListener(evt, handleFirstInteraction, true);
+        document.removeEventListener(evt, handleFirstInteraction, true);
       });
     };
 
     const handleFirstInteraction = () => {
       if (audioRef.current && !stateRef.current.isMuted) {
         audioRef.current.volume = TARGET_VOLUME;
+        audioRef.current.muted = false;
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           playPromise
@@ -93,17 +100,16 @@ export function AudioController() {
               removeInteractionListeners();
             })
             .catch(() => {
-              // Interaction handling pending
+              // Keep listeners attached if playback not yet ready
             });
         }
-      } else {
-        removeInteractionListeners();
       }
     };
 
     // Attempt immediate autoplay on page open if not muted
     if (!savedMutePreference) {
       audio.volume = TARGET_VOLUME;
+      audio.muted = false;
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
@@ -113,14 +119,14 @@ export function AudioController() {
           .catch(() => {
             // Autoplay was blocked by browser policy; attach interaction listeners for immediate start
             interactionEvents.forEach((evt) => {
-              window.addEventListener(evt, handleFirstInteraction, { passive: true });
-              document.addEventListener(evt, handleFirstInteraction, { passive: true });
+              window.addEventListener(evt, handleFirstInteraction, { passive: true, capture: true });
+              document.addEventListener(evt, handleFirstInteraction, { passive: true, capture: true });
             });
           });
       } else {
         interactionEvents.forEach((evt) => {
-          window.addEventListener(evt, handleFirstInteraction, { passive: true });
-          document.addEventListener(evt, handleFirstInteraction, { passive: true });
+          window.addEventListener(evt, handleFirstInteraction, { passive: true, capture: true });
+          document.addEventListener(evt, handleFirstInteraction, { passive: true, capture: true });
         });
       }
     }
@@ -133,8 +139,6 @@ export function AudioController() {
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('error', handleError);
-      audio.pause();
-      audioRef.current = null;
     };
   }, [dispatch]);
 
@@ -153,6 +157,7 @@ export function AudioController() {
       }
     } else {
       audio.volume = TARGET_VOLUME;
+      audio.muted = false;
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
@@ -167,5 +172,17 @@ export function AudioController() {
     }
   }, [state.isMuted]);
 
-  return null;
+  return (
+    <audio
+      ref={audioRef}
+      id="birthday-background-music"
+      src={AUDIO_SRC}
+      preload="auto"
+      loop
+      autoPlay
+      playsInline
+      className="fixed -top-full -left-full w-0 h-0 opacity-0 pointer-events-none"
+      aria-hidden="true"
+    />
+  );
 }

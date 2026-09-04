@@ -8,8 +8,8 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
     birthDate: 'October 24',
   },
   sender: {
-    name: 'Alex',
-    signature: 'With all my love, Alex',
+    name: 'Tushar',
+    signature: 'With all my love, Tushar',
     relationship: 'Forever Friend',
   },
   theme: 'romantic',
@@ -132,7 +132,7 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
     ],
     highlightQuote: '“You do not just exist in the world; you make the world brighter for everyone in it.”',
     closing: 'Always cheering for you,',
-    signature: 'Alex ✨',
+    signature: 'Tushar ✨',
   },
   celebration: {
     title: 'Happy Birthday, Meghna! 🎉',
@@ -141,8 +141,8 @@ export const DEFAULT_BIRTHDAY_CONFIG: BirthdayConfig = {
     replayButtonText: 'Experience Again 🔄',
   },
   audio: {
-    bgMusicUrl: '/assets/audio/ambient-celebration.mp3',
-    defaultVolume: 0.5,
+    bgMusicUrl: '/audio/arj-kiya-hai.mp3',
+    defaultVolume: 1.0,
     soundEffectsEnabled: true,
   },
 };

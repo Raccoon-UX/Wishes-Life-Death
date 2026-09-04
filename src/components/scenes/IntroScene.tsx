@@ -6,6 +6,7 @@ import { useExperience } from '@/hooks/useExperience';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useBirthdayConfig } from '@/context/ConfigContext';
 import { Sparkles, ArrowRight, Heart } from 'lucide-react';
+import { playBackgroundMusic } from '@/components/audio/AudioController';
 
 export function IntroScene() {
   const { nextScene, completeScene, setInteractionFlag } = useExperience();
@@ -13,6 +14,7 @@ export function IntroScene() {
   const prefersReducedMotion = useReducedMotion();
 
   const handleOpenGift = () => {
+    playBackgroundMusic();
     completeScene('intro');
     setInteractionFlag('isIntroComplete', true);
     nextScene();

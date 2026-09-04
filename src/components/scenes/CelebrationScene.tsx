@@ -15,7 +15,7 @@ export function CelebrationScene() {
 
   const getDelay = (seconds: number) => (prefersReducedMotion ? 0 : seconds);
   const recipientName = (birthdayConfig.recipient.name || 'Meghna').toUpperCase();
-  const senderName = birthdayConfig.sender.name || 'Alex';
+  const senderName = birthdayConfig.sender.name || 'Tushar';
 
   return (
     <div className="w-full max-w-xl mx-auto px-6 sm:px-8 py-8 flex flex-col items-center justify-center text-center select-none relative z-10">

@@ -4,6 +4,7 @@ import React from 'react';
 import { Volume2, VolumeX, RotateCcw } from 'lucide-react';
 import { useExperience } from '@/hooks/useExperience';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { playBackgroundMusic } from '@/components/audio/AudioController';
 
 export function HeaderControls() {
   const { state, toggleSound, replayExperience } = useExperience();
@@ -11,12 +12,23 @@ export function HeaderControls() {
 
   const isPlaying = !state.isMuted && state.isMusicPlaying;
 
+  const handleToggleMusic = () => {
+    if (state.isMuted) {
+      toggleSound();
+      playBackgroundMusic();
+    } else if (!state.isMusicPlaying) {
+      playBackgroundMusic();
+    } else {
+      toggleSound();
+    }
+  };
+
   return (
     <header className="fixed top-3 sm:top-5 right-3 sm:right-6 z-50 flex items-center gap-2.5 select-none pointer-events-auto">
       {/* Music / Sound toggle button */}
       <button
         type="button"
-        onClick={toggleSound}
+        onClick={handleToggleMusic}
         aria-label={state.isMuted ? 'Turn music on' : 'Turn music off'}
         title={state.isMuted ? 'Turn music on' : 'Turn music off'}
         className="min-h-[42px] px-3 py-2 rounded-full bg-[#FFFDF9]/90 hover:bg-white backdrop-blur-md border border-[#F8B4C8]/60 hover:border-[#E86A92] text-[#3B0D1E] shadow-romantic transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E86A92] active:scale-95 flex items-center gap-2 group cursor-pointer"
