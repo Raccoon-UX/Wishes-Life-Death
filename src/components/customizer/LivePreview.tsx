@@ -148,13 +148,13 @@ export function LivePreview({ config }: LivePreviewProps) {
 
             <div className="bg-gradient-to-b from-[#FFFDF9] to-[#FFF9F5] text-[#3B0D1E] rounded-xl p-4 border border-[#D9A441]/50 text-left space-y-2 shadow-sm">
               <span className="text-[11px] font-bold font-display text-[#3B0D1E]">
-                {config.letter.salutation || 'Dearest Meghna,'}
+                {config.letter.salutation || 'Hi! Meghana,'}
               </span>
               <p className="text-xs text-[#3B0D1E]/90 line-clamp-3">
-                {config.letter.paragraphs[0] || 'As you turn another page in your book of life...'}
+                {config.letter.paragraphs[0] || 'Happiest Birthday 💐 Dear.......'}
               </p>
               <div className="text-right text-xs font-bold text-[#E86A92] font-handwriting">
-                {config.letter.signature || 'With love, Tushar ✨'}
+                {config.letter.signature || 'Yours Tushar'}
               </div>
             </div>
 

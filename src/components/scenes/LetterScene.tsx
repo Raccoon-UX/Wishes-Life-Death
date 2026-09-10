@@ -100,9 +100,11 @@ export function LetterScene() {
 
               {/* Letter Closing & Signature Stamp */}
               <div className="pt-2 border-t border-[#D9A441]/20 text-right space-y-0.5">
-                <p className="text-xs text-[#8B2648] font-sans italic">
-                  {letter.closing}
-                </p>
+                {letter.closing && (
+                  <p className="text-xs text-[#8B2648] font-sans italic">
+                    {letter.closing}
+                  </p>
+                )}
                 <p className="font-handwriting text-2xl sm:text-3xl text-[#E86A92] font-bold">
                   {letter.signature}
                 </p>
